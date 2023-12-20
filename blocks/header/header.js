@@ -133,8 +133,6 @@ export default async function decorate(block) {
       });
   }
 
-  console.log(navSections);
-
   // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
@@ -153,14 +151,13 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
   const navArray = [...block.querySelectorAll('.default-content-wrapper ul li a')];
-  console.log(block, navArray, navArray.length, isDesktop);
   block.innerHTML = `<nav class="menu">
-  <input type="checkbox" role="button" aria-label="Display the menu" class="hamburger" />
+  <input type="checkbox" aria-label="Display the menu" class="hamburger" />
   <div class="hexagon">
   </div>
   <a href="/" class="brand">
   <img src="../../icons/logo.svg" alt="Hexagon Darts" />
-  <strong>My Darts Brand</strong>
+  <strong>Hexagon Darts</strong>
   </a>
   <ul>
   ${navArray
@@ -182,18 +179,23 @@ export default async function decorate(block) {
     document.querySelector('.hamburger').addEventListener('click', () => {
       const main = document.querySelector('main');
       const footer = document.querySelector('footer');
+      const ul = document.querySelector('.menu ul');
       if (document.querySelector('.hamburger').checked) {
+        ul.style.top = '0';
+        ul.style.transition = `top 0s ease-in-out`;
         main.style.opacity = '0';
         footer.style.opacity = '0';
         main.style.transition = 'opacity 0.5s ease-in-out';
-        footer.style.transition = 'opacity 0.5s ease-in-out';
+        footer.style.transition = 'opacity 0.1s ease-in-out';
         document.querySelector('.brand').style.display = 'none';
       } else {
         main.style.opacity = '1';
         footer.style.opacity = '1';
         main.style.transition = `opacity ${navArray.length * 0.35}s ease-in-out`;
-        footer.style.transition = `opacity ${navArray.length * 0.35}s ease-in-out`;
+        footer.style.transition = `opacity ${navArray.length * 2}s ease-in-out`;
         document.querySelector('.brand').style.display = 'flex';
+        ul.style.top = '100vh';
+        ul.style.transition = `top ${navArray.length * 0.5}s ease-in-out`;
       }
     });
   }

@@ -1,3 +1,7 @@
+header {
+  position: absolute;
+}
+
 main.nav-open,
 footer.nav-open {
   opacity: 0;
@@ -30,9 +34,10 @@ footer.nav-closed {
   align-items: center;
 
   position: fixed;
-  top: 0vh;
+  top: 100vh;
   left: 0;
   height: 100vh !important;
+  /* height: 100vh !important; */
   width: 100vw !important;
 }
 
@@ -169,9 +174,9 @@ footer.nav-closed {
 .hamburger:focus-visible {
   clip-path: none;
   -webkit-mask: none;
-  border: none;
-  outline: 2px solid var(--c);
-  outline-offset: 5px;
+  outline-offset: 8px;
+  border-inline: 2px solid transparent;
+  right: 30px;
 }
 
 .hexagon {
