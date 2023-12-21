@@ -293,7 +293,7 @@ main .section {
 
 @media (width >= 900px) {
   .section > div {
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: auto;
   }
 }
@@ -301,4 +301,8 @@ main .section {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+[data-align='center'] {
+  text-align: center;
 }

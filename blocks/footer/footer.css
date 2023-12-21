@@ -3,102 +3,56 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #10182f;
+  background: #3e4b9a;
+  color: white;
 }
 
-footer .footer .footer-row {
+footer .footer .columns {
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
-  gap: 3.5rem;
+  gap: 1rem;
 }
 
-footer .footer .section .default-content-wrapper {
+footer .footer .section .columns-wrapper > div {
+  margin: 0;
+  width: 100% !important;
+  max-width: auto !important;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
 }
 
-footer .footer .section .default-content-wrapper h3 {
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 400 !important;
+footer .footer .section .columns-wrapper > div > div {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
-footer .section .default-content-wrapper ul {
+footer .footer .section .columns-wrapper h3 {
+  font-size: 1.4rem;
+  font-weight: 600 !important;
+}
+
+footer .section .columns-wrapper ul {
   margin-top: 20px;
+  padding: 0;
 }
 
-footer .section .default-content-wrapper ul li {
+footer .section .columns-wrapper ul li {
   list-style: none;
   margin-bottom: 10px;
 }
 
-footer .section .default-content-wrapper ul li a {
+footer .section .columns-wrapper ul li a {
   text-decoration: none;
-  color: #bfbfbf;
+  color: lightgray;
 }
 
-footer .section .default-content-wrapper ul li a:hover {
-  color: #fff;
+footer .section .columns-wrapper ul li a:hover {
+  color: white;
 }
-
-footer .section .default-content-wrapper p {
-  margin: 20px 0;
-  color: #bfbfbf;
-  max-width: 300px;
-}
-
-/* footer .section .default-content-wrapper form {
-  display: flex;
-  gap: 5px;
-}
-
-footer .section .default-content-wrapper input {
-  height: 40px;
-  border-radius: 6px;
-  background: none;
-  width: 100%;
-  outline: none;
-  border: 1px solid #7489c6;
-  caret-color: #fff;
-  color: #fff;
-  padding-left: 10px;
-}
-
-footer .section .default-content-wrapper input::placeholder {
-  color: #ccc;
-}
-
-footer .section .default-content-wrapper form button {
-  background: #fff;
-  outline: none;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: 0.2s ease;
-}
-
-footer .section .default-content-wrapper form button:hover {
-  background: #cecccc;
-}
-
-footer .section .default-content-wrapper .icons {
-  display: flex;
-  margin-top: 30px;
-  gap: 30px;
-  cursor: pointer;
-}
-
-footer .section .default-content-wrapper .icons i {
-  color: #afb6c7;
-}
-
-footer .section .default-content-wrapper .icons i:hover {
-  color: #fff;
-} */
 
 @media (max-width: 768px) {
   footer {
@@ -110,20 +64,15 @@ footer .section .default-content-wrapper .icons i:hover {
     border-radius: 0;
   }
 
-  footer .footer .footer-row {
-    padding: 20px;
-    gap: 1rem;
-  }
-
-  footer .section .default-content-wrapper form {
+  footer .section .columns-wrapper form {
     display: block;
   }
 
-  footer .section .default-content-wrapper form :where(input, button) {
+  footer .section .columns-wrapper form :where(input, button) {
     width: 100%;
   }
 
-  footer .section .default-content-wrapper form button {
+  footer .section .columns-wrapper form button {
     margin: 10px 0 0 0;
   }
 }

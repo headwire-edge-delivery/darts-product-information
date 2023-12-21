@@ -159,7 +159,7 @@ export default async function decorate(block) {
   <img src="../../icons/logo.svg" alt="Hexagon Darts" />
   <strong>Hexagon Darts</strong>
   </a>
-  <ul>
+  <ul class="nav-items">
   ${navArray
     .map(
       (nav, index) => `
@@ -179,7 +179,7 @@ export default async function decorate(block) {
     document.querySelector('.hamburger').addEventListener('click', () => {
       const main = document.querySelector('main');
       const footer = document.querySelector('footer');
-      const ul = document.querySelector('.menu ul');
+      const ul = document.querySelector('.menu .nav-items');
       if (document.querySelector('.hamburger').checked) {
         ul.style.top = '0';
         ul.style.transition = `top 0s ease-in-out`;
@@ -192,9 +192,9 @@ export default async function decorate(block) {
         main.style.opacity = '1';
         footer.style.opacity = '1';
         main.style.transition = `opacity ${navArray.length * 0.35}s ease-in-out`;
-        footer.style.transition = `opacity ${navArray.length * 2}s ease-in-out`;
+        footer.style.transition = `opacity ${navArray.length * 1}s ease-in-out`;
         document.querySelector('.brand').style.display = 'flex';
-        ul.style.top = '100vh';
+        ul.style.top = '200vh';
         ul.style.transition = `top ${navArray.length * 0.5}s ease-in-out`;
       }
     });
