@@ -156,7 +156,7 @@ export default async function decorate(block) {
   <div class="hexagon">
   </div>
   <a href="/" class="brand">
-  <img src="../../icons/logo.svg" alt="Hexagon Darts" />
+  <img src="../../icons/logo.svg" alt="Hexagon Darts" height="100" width="87" />
   <strong>Hexagon Darts</strong>
   </a>
   <ul class="nav-items">
