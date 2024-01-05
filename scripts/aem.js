@@ -313,6 +313,7 @@ function createOptimizedPicture(
   const { pathname } = url;
   const ext = pathname.substring(pathname.lastIndexOf('.') + 1);
 
+  console.log('breakpoints', breakpoints);
   // webp
   breakpoints.forEach((br) => {
     const source = document.createElement('source');
@@ -335,6 +336,8 @@ function createOptimizedPicture(
       img.setAttribute('alt', alt);
       picture.appendChild(img);
       img.setAttribute('src', `${pathname}?width=${br.width}&format=${ext}&optimize=medium`);
+      img.setAttribute('width', `${br.width}`);
+      img.setAttribute('height', `${br.height}`);
     }
   });
 

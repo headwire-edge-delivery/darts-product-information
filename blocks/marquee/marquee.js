@@ -14,13 +14,13 @@ export default function decorate(block) {
       let picture = div.querySelector('picture');
       if (picture) {
         const img = picture.querySelector('img');
+        const targetHeight = 100;
         const height = img.height;
         const width = img.width;
-        const factor = height / 100;
-        console.log(height, width, factor, height / factor, width / factor);
+        const factor = height / targetHeight;
         picture.replaceWith(
           createOptimizedPicture(img.src.split('?')[0], img.alt, false, [
-            { height: `${height}`, width: `${width / factor}` },
+            { height: `${targetHeight}`, width: `${width / factor}` },
           ])
         );
       }
