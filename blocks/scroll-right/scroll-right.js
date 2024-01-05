@@ -6,13 +6,13 @@ export default function decorate(block) {
   block.innerHTML = `<section class="scroll-right-section">
   <ul>
   ${imageArray
-    .map(
-      (picture) => `
-              <li class="scroll-right-item">
+    .map((picture) => {
+      return `
+              <li class="scroll-right-item" >
                 ${picture.outerHTML}
               </li>
-            `
-    )
+            `;
+    })
     .join('')}
   </ul>
 </section>`;
