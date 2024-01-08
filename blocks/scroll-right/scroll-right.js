@@ -7,12 +7,11 @@ export default function decorate(block) {
   block.innerHTML = `<section class="scroll-right-section">
   <ul>
   ${imageArray
-    .map((picture, index) => {
-      if (index === 0) {
-        const img = picture.querySelector('img');
-        const height = img.height;
-        const width = img.width;
-        return `
+    .map((picture) => {
+      const img = picture.querySelector('img');
+      const height = img.height;
+      const width = img.width;
+      return `
                 <li class="scroll-right-item" >
                   ${
                     createOptimizedPicture(img.src.split('?')[0], img.alt, true, [
@@ -21,13 +20,6 @@ export default function decorate(block) {
                   }
                 </li>
               `;
-      } else {
-        return `
-              <li class="scroll-right-item" >
-                ${picture.outerHTML}
-              </li>
-            `;
-      }
     })
     .join('')}
   </ul>
