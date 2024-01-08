@@ -313,7 +313,6 @@ function createOptimizedPicture(
   const { pathname } = url;
   const ext = pathname.substring(pathname.lastIndexOf('.') + 1);
 
-  console.log('breakpoints', breakpoints);
   // webp
   breakpoints.forEach((br) => {
     const source = document.createElement('source');
