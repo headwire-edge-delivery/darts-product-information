@@ -1,4 +1,4 @@
-import { animate } from 'https://cdn.skypack.dev/motion?min';
+import { animate } from 'https://cdn.skypack.dev/pin/motion@v10.17.0-BH8LrXiUHw668sFYKran/mode=imports,min/optimized/motion.js';
 console.log('animate loaded:', animate);
 animate(
   '.error-number',

@@ -72,7 +72,7 @@ function sampleRUM(checkpoint, data = {}) {
       };
     }
     const { weight, id, firstReadTime } = window.hlx.rum;
-    if (window.hlx && window.hlx.rum && window.hlx.rum.isSelected) {
+    if (window.hlx?.rum?.isSelected) {
       const knownProperties = [
         'weight',
         'id',
@@ -287,7 +287,7 @@ async function loadScript(src, attrs) {
  * @returns {string} The metadata value(s)
  */
 function getMetadata(name, doc = document) {
-  const attr = name && name.includes(':') ? 'property' : 'name';
+  const attr = name?.includes(':') ? 'property' : 'name';
   const meta = [...doc.head.querySelectorAll(`meta[${attr}="${name}"]`)]
     .map((m) => m.content)
     .join(', ');
@@ -506,8 +506,7 @@ async function fetchPlaceholders(prefix = 'default') {
  */
 function updateSectionsStatus(main) {
   const sections = [...main.querySelectorAll(':scope > div.section')];
-  for (let i = 0; i < sections.length; i += 1) {
-    const section = sections[i];
+  for (const section of sections) {
     const status = section.dataset.sectionStatus;
     if (status !== 'loaded') {
       const loadingBlock = section.querySelector(
@@ -599,9 +598,9 @@ async function loadBlock(block) {
 async function loadBlocks(main) {
   updateSectionsStatus(main);
   const blocks = [...main.querySelectorAll('div.block')];
-  for (let i = 0; i < blocks.length; i += 1) {
+  for (const block of blocks) {
     // eslint-disable-next-line no-await-in-loop
-    await loadBlock(blocks[i]);
+    await loadBlock(block);
     updateSectionsStatus(main);
   }
 }

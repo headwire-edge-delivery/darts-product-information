@@ -1,4 +1,7 @@
-import { animate, scroll } from 'https://cdn.skypack.dev/motion?min';
+import {
+  animate,
+  scroll,
+} from 'https://cdn.skypack.dev/pin/motion@v10.17.0-BH8LrXiUHw668sFYKran/mode=imports,min/optimized/motion.js';
 
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
