@@ -11,11 +11,15 @@ export default function decorate(block) {
       const img = picture.querySelector('img');
       const height = img.height;
       const width = img.width;
+
       return `
                 <li class="scroll-right-item" >
                   ${
-                    createOptimizedPicture(img.src.split('?')[0], img.alt, true, [
+                    createOptimizedPicture(img.src.split('?')[0], img.alt, false, [
                       { height, width },
+                      { height: height / 2, width: width / 2 },
+                      { height: height / 4, width: width / 4 },
+                      { height: height / 6, width: width / 6 },
                     ]).outerHTML
                   }
                 </li>

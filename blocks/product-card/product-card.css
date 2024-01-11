@@ -1,0 +1,17 @@
+/* block specific CSS goes here */
+
+main .product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 32px;
+  min-height: 600px;
+}
+
+main .product-card-image {
+  z-index: -1;
+  inset: 0;
+  object-fit: cover;
+  box-sizing: border-box;
+}
