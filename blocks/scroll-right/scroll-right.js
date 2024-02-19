@@ -23,6 +23,7 @@ export default function decorate(block) {
                       { height: height / 2, width: width / 2 },
                       { height: height / 4, width: width / 4 },
                       { height: height / 6, width: width / 6 },
+                      // { width: 375 },
                     ]).outerHTML
                   }
                 </li>
