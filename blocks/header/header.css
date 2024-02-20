@@ -56,8 +56,8 @@ header {
   max-width: 104px;
   height: 60px;
   color: white;
-  background: rgba(36, 36, 36, 0.9);
-  border-color: rgba(36, 36, 36, 0.9);
+  background: #242424e6;
+  border-color: #242424e6;
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -80,8 +80,8 @@ header {
   color: #c00707;
 }
 
-.hex a:before,
-.hex label:before {
+.hex a::before,
+.hex label::before {
   content: ' ';
   width: 0;
   height: 0;
@@ -94,8 +94,8 @@ header {
   top: -30px;
 }
 
-.hex a:after,
-.hex label:after {
+.hex a::after,
+.hex label::after {
   content: '';
   width: 0;
   left: 0;
@@ -140,17 +140,20 @@ header {
   z-index: 2147483646;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .menu .nav-items {
     display: none;
   }
+
   .menu .nav-items-mobile-open {
     display: flex;
     position: fixed;
   }
+
   .hamburger-menu {
     display: flex;
   }
+
   .menu {
     gap: 8px;
   }
@@ -185,25 +188,21 @@ header {
   transition-duration: 500ms;
 }
 
-#toggleChecker {
+#toggle-checker {
   height: 3em;
   width: 100%;
   display: none;
 }
 
-#toggleChecker:checked + #togglerLable .checkboxtoggler .line-1 {
-  -webkit-transform: rotate(45deg) translateY(0.7em) translateX(0.7em);
-  -ms-transform: rotate(45deg) translateY(0.7em) translateX(0.7em);
+#toggle-checker:checked + #toggler-label .checkboxtoggler .line-1 {
   transform: rotate(45deg) translateY(0.7em) translateX(0.7em);
 }
 
-#toggleChecker:checked + #togglerLable .checkboxtoggler .line-2 {
-  -webkit-transform: rotate(-45deg) translateY(0em) translateX(0.1em);
-  -ms-transform: rotate(-45deg) translateY(0em) translateX(0.1em);
-  transform: rotate(-45deg) translateY(0em) translateX(0.1em);
+#toggle-checker:checked + #toggler-label .checkboxtoggler .line-2 {
+  transform: rotate(-45deg) translateY(0) translateX(0.1em);
 }
 
-#toggleChecker:checked + #togglerLable .checkboxtoggler .line-3 {
+#toggle-checker:checked + #toggler-label .checkboxtoggler .line-3 {
   transform: scaleX(0);
   transform-origin: left;
 }

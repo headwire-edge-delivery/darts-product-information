@@ -13,9 +13,15 @@ module.exports = {
   rules: {
     // allow reassigning param
     'no-param-reassign': [2, { props: false }],
-    'linebreak-style': ['error', 'unix', 'windows'],
-    'import/extensions': ['error', {
-      js: 'always',
-    }],
+    'linebreak-style': ['error', 'unix'],
+    indent: 'off',
+    'operator-linebreak': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'import/extensions': [
+      'error',
+      {
+        js: 'always',
+      },
+    ],
   },
 };

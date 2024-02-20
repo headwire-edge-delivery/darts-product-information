@@ -154,6 +154,7 @@ export default async function decorate(block) {
   const mobileNavArray = [];
   const FillMobileNavArray = () => {
     let toggle = false;
+    // eslint-disable-next-line space-in-parens
     for (let i = 0; i < navArray.length; ) {
       if (toggle) {
         // Group of 2 elements
@@ -181,18 +182,18 @@ export default async function decorate(block) {
 
   block.innerHTML = /* html */ `<nav class="menu">
     <ul class="nav-items nav-items-first-half">${firstHalf
-      .map((nav) => `<li><span class="hex">${nav.outerHTML}</span></li>`)
+      .map((navFirst) => `<li><span class="hex">${navFirst.outerHTML}</span></li>`)
       .join('')}
     </ul>
     ${logo}
     <ul class="nav-items nav-items-second-half">${secondHalf
-      .map((nav) => `<li><span class="hex">${nav.outerHTML}</span></li>`)
+      .map((navSecond) => `<li><span class="hex">${navSecond.outerHTML}</span></li>`)
       .join('')}
     </ul>
     
     <div class="hex hamburger-menu">
-      <input id="toggleChecker" type="checkbox">
-<label id="togglerLable" for="toggleChecker">
+      <input id="toggle-checker" type="checkbox">
+<label id="toggler-label" for="toggle-checker">
   <div class="checkboxtoggler">
     <div class="line-1"></div>
     <div class="line-2"></div>
@@ -203,17 +204,14 @@ export default async function decorate(block) {
       .map(
         (navContainer) =>
           `<ul>${navContainer
-            .map(
-              (nav) => `<li><span class="hex">
-              ${nav.outerHTML}</span></li>`
-            )
-            .join('')}</ul>`
+            .map((navMobile) => `<li><span class="hex">${navMobile.outerHTML}</span></li>`)
+            .join('')}</ul>`,
       )
       .join('')}
       </div>
 </nav><div class="mobile-nav-background"/>`;
 
-  const hamburgerMenu = document.getElementById('toggleChecker');
+  const hamburgerMenu = document.getElementById('toggle-checker');
   const mobileMenu = document.getElementsByClassName('nav-items-mobile')[0];
   const mobileNavBackground = document.getElementsByClassName('mobile-nav-background')[0];
   hamburgerMenu.addEventListener('click', () => {

@@ -54,7 +54,7 @@ footer .section .columns-wrapper ul li a:hover {
   color: white;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   footer {
     position: relative;
     bottom: 0;
@@ -73,6 +73,6 @@ footer .section .columns-wrapper ul li a:hover {
   }
 
   footer .section .columns-wrapper form button {
-    margin: 10px 0 0 0;
+    margin: 10px 0 0;
   }
 }

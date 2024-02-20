@@ -14,6 +14,6 @@ export default async function decorate(block) {
   const fragment = await loadFragment(footerPath);
 
   // decorate footer DOM
-  const footer = document.createElement('div');
+  // const footer = document.createElement('div');
   while (fragment.firstElementChild) block.append(fragment.firstElementChild);
 }

@@ -75,7 +75,7 @@ html {
 
 body {
   /* Set the background color of the scrollbar track to match your page's background */
-  scrollbar-color: transparent #ffffff;
+  scrollbar-color: transparent #fff;
   font-size: var(--body-font-size-m);
   margin: 0;
   font-family: var(--body-font-family);
@@ -111,18 +111,23 @@ h6 {
 h1 {
   font-size: var(--heading-font-size-xxl);
 }
+
 h2 {
   font-size: var(--heading-font-size-xl);
 }
+
 h3 {
   font-size: var(--heading-font-size-l);
 }
+
 h4 {
   font-size: var(--heading-font-size-m);
 }
+
 h5 {
   font-size: var(--heading-font-size-s);
 }
+
 h6 {
   font-size: var(--heading-font-size-xs);
 }
@@ -293,7 +298,6 @@ main .section {
 
 @media (width >= 900px) {
   .section > div {
-    /* max-width: 1200px; */
     margin: auto;
   }
 }

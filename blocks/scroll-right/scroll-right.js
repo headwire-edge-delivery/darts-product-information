@@ -1,8 +1,9 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
 import {
   animate,
   scroll,
+  // eslint-disable-next-line import/no-unresolved
 } from 'https://cdn.skypack.dev/pin/motion@v10.17.0-BH8LrXiUHw668sFYKran/mode=imports,min/optimized/motion.js';
+import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
   const imageArray = [...block.querySelectorAll('picture')];
@@ -12,8 +13,7 @@ export default function decorate(block) {
   ${imageArray
     .map((picture) => {
       const img = picture.querySelector('img');
-      const height = img.height;
-      const width = img.width;
+      const { height, width } = img;
 
       return `
                 <li class="scroll-right-item" >
@@ -41,7 +41,7 @@ export default function decorate(block) {
     animate('ul', {
       transform: ['none', `translateX(-${items.length - 1}00vw)`],
     }),
-    { target: document.querySelector('section') }
+    { target: document.querySelector('section') },
   );
 
   // Image title parallax

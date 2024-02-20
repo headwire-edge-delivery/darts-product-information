@@ -8,20 +8,19 @@ export default function decorate(block) {
 
   block.innerHTML = `<article>
   <div class="marquee">
-    <div class="marquee__group">
+    <div class="marquee-group">
   ${divs
     .map((div) => {
-      let picture = div.querySelector('picture');
+      const picture = div.querySelector('picture');
       if (picture) {
         const img = picture.querySelector('img');
         const targetHeight = 100;
-        const height = img.height;
-        const width = img.width;
+        const { width, height } = img;
         const factor = height / targetHeight;
         picture.replaceWith(
           createOptimizedPicture(img.src.split('?')[0], img.alt, false, [
             { height: `${targetHeight}`, width: `${width / factor}` },
-          ])
+          ]),
         );
       }
       return `
@@ -32,14 +31,14 @@ export default function decorate(block) {
     })
     .join('')}
     </div>
-    <div aria-hidden="true" class="marquee__group">
+    <div aria-hidden="true" class="marquee-group">
   ${divs
     .map(
       (div) => `
               <div class="marquee-item">
                 ${div.outerHTML}
               </div>
-            `
+            `,
     )
     .join('')}
     </div>

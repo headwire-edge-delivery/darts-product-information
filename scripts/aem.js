@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /*
  * Copyright 2023 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -98,7 +99,7 @@ function sampleRUM(checkpoint, data = {}) {
             t: Date.now() - firstReadTime,
             ...data,
           },
-          knownProperties
+          knownProperties,
         );
         const url = `https://rum.hlx.page/.rum/${weight}`;
         // eslint-disable-next-line no-unused-expressions
@@ -306,7 +307,7 @@ function createOptimizedPicture(
   src,
   alt = '',
   eager = false,
-  breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]
+  breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }],
 ) {
   const url = new URL(src, window.location.href);
   const picture = document.createElement('picture');
@@ -510,7 +511,7 @@ function updateSectionsStatus(main) {
     const status = section.dataset.sectionStatus;
     if (status !== 'loaded') {
       const loadingBlock = section.querySelector(
-        '.block[data-block-status="initialized"], .block[data-block-status="loading"]'
+        '.block[data-block-status="initialized"], .block[data-block-status="loading"]',
       );
       if (loadingBlock) {
         section.dataset.sectionStatus = 'loading';

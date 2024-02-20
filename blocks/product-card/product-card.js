@@ -1,11 +1,11 @@
+/* eslint-disable indent */
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
   const divs = [...block.querySelectorAll('.product-card > div')];
   const picture = divs[0];
   const img = picture.querySelector('img');
-  const height = img.height;
-  const width = img.width;
+  const { height, width } = img;
   const button = divs[1];
   const context = divs[2];
   picture.classList.add('product-card-image');
