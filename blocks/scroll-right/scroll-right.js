@@ -1,4 +1,9 @@
-import { animate, scroll } from 'https://cdn.skypack.dev/motion?min';
+import {
+  animate,
+  scroll,
+  // eslint-disable-next-line import/no-unresolved
+} from 'https://cdn.skypack.dev/pin/motion@v10.17.0-BH8LrXiUHw668sFYKran/mode=imports,min/optimized/motion.js';
+import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
   const imageArray = [...block.querySelectorAll('picture')];
@@ -6,13 +11,24 @@ export default function decorate(block) {
   block.innerHTML = `<section class="scroll-right-section">
   <ul>
   ${imageArray
-    .map(
-      (picture) => `
-              <li class="scroll-right-item">
-                ${picture.outerHTML}
-              </li>
-            `
-    )
+    .map((picture) => {
+      const img = picture.querySelector('img');
+      const { height, width } = img;
+
+      return `
+                <li class="scroll-right-item" >
+                  ${
+                    createOptimizedPicture(img.src.split('?')[0], img.alt, false, [
+                      { height, width },
+                      { height: height / 2, width: width / 2 },
+                      { height: height / 4, width: width / 4 },
+                      { height: height / 6, width: width / 6 },
+                      // { width: 375 },
+                    ]).outerHTML
+                  }
+                </li>
+              `;
+    })
     .join('')}
   </ul>
 </section>`;
@@ -25,7 +41,7 @@ export default function decorate(block) {
     animate('ul', {
       transform: ['none', `translateX(-${items.length - 1}00vw)`],
     }),
-    { target: document.querySelector('section') }
+    { target: document.querySelector('section') },
   );
 
   // Image title parallax

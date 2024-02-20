@@ -1,4 +1,8 @@
-import { animate, scroll } from 'https://cdn.skypack.dev/motion?min';
+import {
+  animate,
+  scroll,
+  // eslint-disable-next-line import/no-unresolved
+} from 'https://cdn.skypack.dev/pin/motion@v10.17.0-BH8LrXiUHw668sFYKran/mode=imports,min/optimized/motion.js';
 
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
@@ -25,7 +29,7 @@ export default function decorate(block) {
     animate('.motion-img-col', {
       transform: ['none', `translateX(-${items.length - 1}00vw)`],
     }),
-    { target: document.querySelector('section') }
+    { target: document.querySelector('section') },
   );
 
   // Image title parallax

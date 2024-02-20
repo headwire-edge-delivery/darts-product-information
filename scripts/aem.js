@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /*
  * Copyright 2023 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -72,7 +73,7 @@ function sampleRUM(checkpoint, data = {}) {
       };
     }
     const { weight, id, firstReadTime } = window.hlx.rum;
-    if (window.hlx && window.hlx.rum && window.hlx.rum.isSelected) {
+    if (window.hlx?.rum?.isSelected) {
       const knownProperties = [
         'weight',
         'id',
@@ -98,7 +99,7 @@ function sampleRUM(checkpoint, data = {}) {
             t: Date.now() - firstReadTime,
             ...data,
           },
-          knownProperties
+          knownProperties,
         );
         const url = `https://rum.hlx.page/.rum/${weight}`;
         // eslint-disable-next-line no-unused-expressions
@@ -287,7 +288,7 @@ async function loadScript(src, attrs) {
  * @returns {string} The metadata value(s)
  */
 function getMetadata(name, doc = document) {
-  const attr = name && name.includes(':') ? 'property' : 'name';
+  const attr = name?.includes(':') ? 'property' : 'name';
   const meta = [...doc.head.querySelectorAll(`meta[${attr}="${name}"]`)]
     .map((m) => m.content)
     .join(', ');
@@ -306,7 +307,7 @@ function createOptimizedPicture(
   src,
   alt = '',
   eager = false,
-  breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]
+  breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }],
 ) {
   const url = new URL(src, window.location.href);
   const picture = document.createElement('picture');
@@ -335,6 +336,8 @@ function createOptimizedPicture(
       img.setAttribute('alt', alt);
       picture.appendChild(img);
       img.setAttribute('src', `${pathname}?width=${br.width}&format=${ext}&optimize=medium`);
+      img.setAttribute('width', `${br.width}`);
+      img.setAttribute('height', `${br.height}`);
     }
   });
 
@@ -504,12 +507,11 @@ async function fetchPlaceholders(prefix = 'default') {
  */
 function updateSectionsStatus(main) {
   const sections = [...main.querySelectorAll(':scope > div.section')];
-  for (let i = 0; i < sections.length; i += 1) {
-    const section = sections[i];
+  for (const section of sections) {
     const status = section.dataset.sectionStatus;
     if (status !== 'loaded') {
       const loadingBlock = section.querySelector(
-        '.block[data-block-status="initialized"], .block[data-block-status="loading"]'
+        '.block[data-block-status="initialized"], .block[data-block-status="loading"]',
       );
       if (loadingBlock) {
         section.dataset.sectionStatus = 'loading';
@@ -597,9 +599,9 @@ async function loadBlock(block) {
 async function loadBlocks(main) {
   updateSectionsStatus(main);
   const blocks = [...main.querySelectorAll('div.block')];
-  for (let i = 0; i < blocks.length; i += 1) {
+  for (const block of blocks) {
     // eslint-disable-next-line no-await-in-loop
-    await loadBlock(blocks[i]);
+    await loadBlock(block);
     updateSectionsStatus(main);
   }
 }

@@ -32,10 +32,12 @@
   "resolveGlobalModules": false,
   "semi": true,
   "singleQuote": true,
-  "trailingComma": "es5",
+  "trailingComma": "all",
   "useEditorConfig": true,
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
   "withNodeModules": false,
-  "eslintIntegration": true
+  "eslintIntegration": true,
+  "indentWidth": 2,
+  "operatorLineBreak": "before"
 }
