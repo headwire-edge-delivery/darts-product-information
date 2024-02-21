@@ -1,5 +1,7 @@
 header {
   position: absolute;
+  z-index: 9999998 !important;
+  max-width: 80vw !important;
 }
 
 .hexagon-menu,
@@ -9,10 +11,10 @@ header {
 }
 
 .menu {
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   position: fixed;
   flex-direction: row;
-  z-index: 2147483647 !important;
   gap: 16px;
 }
 
@@ -25,6 +27,11 @@ header {
   padding: 0;
   margin: 0;
   gap: 16px;
+}
+
+.menu .nav-items li,
+.hamburger-menu {
+  filter: drop-shadow(0 0 0.5rem #ffffff80);
 }
 
 .hexagon-menu {
