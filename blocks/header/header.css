@@ -16,6 +16,7 @@ header {
   position: fixed;
   flex-direction: row;
   gap: 16px;
+  z-index: 24;
 }
 
 .menu .nav-items,
@@ -30,7 +31,8 @@ header {
 }
 
 .menu .nav-items li,
-.hamburger-menu {
+.hamburger-menu,
+.hexagon-logo {
   filter: drop-shadow(0 0 0.5rem #ffffff80);
 }
 
@@ -46,6 +48,10 @@ header {
   cursor: pointer;
 }
 
+.hexagon-logo:hover .hexagon-logo-path-1 {
+  fill: var(--link-hover-color) !important;
+}
+
 .hexagon-logo .hexagon-logo-path-2,
 .hexagon-logo .hexagon-logo-path-3 {
   fill: #000 !important;
@@ -53,7 +59,7 @@ header {
 
 .hexagon-logo:hover .hexagon-logo-path-2,
 .hexagon-logo:hover .hexagon-logo-path-3 {
-  fill: #fff !important;
+  fill: var(--text-color) !important;
 }
 
 .hex a,
@@ -62,9 +68,9 @@ header {
   width: 104px;
   max-width: 104px;
   height: 60px;
-  color: white;
-  background: #242424e6;
-  border-color: #242424e6;
+  color: var(--text-color);
+  background: var(--hexagon-color);
+  border-color: var(--hexagon-color);
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -80,11 +86,11 @@ header {
 
 .hex label {
   margin-top: 58px;
-  color: #d40c0c;
+  color: var(--link-color);
 }
 
 .hex label:hover {
-  color: #c00707;
+  color: var(--link-hover-color);
 }
 
 .hex a::before,
@@ -112,6 +118,12 @@ header {
   border-color: inherit;
   border-left: 52px solid transparent;
   border-right: 52px solid transparent;
+}
+
+.hex a:hover,
+.hex label:hover {
+  background: var(--hexagon-hover-color);
+  border-color: var(--hexagon-hover-color);
 }
 
 .menu [class^='nav-items-mobile'],
@@ -144,7 +156,7 @@ header {
   position: absolute;
   width: 100dvw;
   height: 100lvh;
-  z-index: 2147483646;
+  z-index: 23;
 }
 
 @media (width <= 768px) {
@@ -175,21 +187,21 @@ header {
 }
 
 .line-1 {
-  background: #df6447;
+  background: var(--link-color);
   height: 0.4em;
   border-radius: 10em;
   transition-duration: 500ms;
 }
 
 .line-2 {
-  background: #df6447;
+  background: var(--link-color);
   height: 0.4em;
   border-radius: 10em;
   transition-duration: 500ms;
 }
 
 .line-3 {
-  background: #df6447;
+  background: var(--link-color);
   height: 0.4em;
   border-radius: 10em;
   transition-duration: 500ms;

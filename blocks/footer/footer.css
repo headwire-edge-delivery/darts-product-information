@@ -29,6 +29,7 @@ footer .footer .section .columns-wrapper {
     margin-top: 20px;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 16px;

@@ -12,12 +12,15 @@
 
 :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
+  --link-color: #d40c0c;
+  --link-hover-color: #c00707;
   --background-color: #fff;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
-  --text-color: #000;
+  --text-color: #fff;
+  --primary-text-color: #000;
+  --hexagon-color: #242424e6;
+  --hexagon-hover-color: #242424;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback;
@@ -81,6 +84,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23696969' fill-opacity='0.1' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   display: none;
   height: 100dvh;
+  width: 100%;
 }
 
 body.appear {
@@ -165,15 +169,8 @@ pre {
 main {
   position: relative;
   z-index: 1;
+  padding-top: 160px;
 }
-
-/* main pre {
-  background-color: var(--overlay-background-color);
-  padding: 1em;
-  border-radius: 0.25em;
-  overflow-x: auto;
-  white-space: pre;
-} */
 
 a:any-link {
   color: var(--link-color);
@@ -186,52 +183,67 @@ a:hover {
 }
 
 /* buttons */
+
 a.button:any-link,
 button {
-  font-family: var(--body-font-family);
-  display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
-}
-
-a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
-}
-
-button:disabled,
-button:disabled:hover {
-  background-color: var(--overlay-background-color);
-  cursor: unset;
-}
-
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
+  margin-top: 30px;
+  width: 104px;
+  max-width: 104px;
+  height: 60px;
   color: var(--text-color);
+  background: var(--hexagon-color);
+  border-color: var(--hexagon-color);
+  border-width: 0;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  hyphens: auto;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Open Sans', sans-serif;
+  filter: drop-shadow(0 0 0.5rem #ffffff80);
+}
+
+a.button:any-link:hover,
+button:hover {
+  background: var(--hexagon-hover-color);
+  border-color: var(--hexagon-hover-color);
+}
+
+a.button:any-link::before,
+button::before {
+  content: ' ';
+  width: 0;
+  height: 0;
+  left: 0;
+  border-bottom: 30px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+  position: absolute;
+  top: -30px;
+}
+
+a.button:any-link::after,
+button::after {
+  content: '';
+  width: 0;
+  left: 0;
+  position: absolute;
+  bottom: -30px;
+  border-top: 30px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
 }
 
 main input {
   font-size: 1.25rem;
   width: 100%;
-  max-width: 50rem;
   display: block;
   margin-bottom: 1rem;
   padding: 0.75rem 0.6rem;
@@ -270,7 +282,9 @@ main img {
 }
 
 .icon {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 24px;
   width: 24px;
 }

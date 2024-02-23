@@ -1,0 +1,194 @@
+.contact-wrapper .contact {
+  > div {
+    display: flex;
+    width: 100%;
+    background: #d9d9d91a;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px #0000001a;
+    backdrop-filter: blur(5px);
+    padding: 50px 32px;
+    gap: 16px;
+
+    > div {
+      width: 100%;
+
+      button {
+        cursor: pointer;
+      }
+
+      &:first-child {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #d9d9d90d;
+        border-radius: 16px;
+        box-shadow: 0 4px 30px #0000001a;
+        backdrop-filter: blur(5px);
+        padding: 16px;
+
+        h4 {
+          text-align: center;
+        }
+
+        .social-icons {
+          display: flex;
+          justify-content: center;
+          gap: 16px;
+
+          a.button:any-link,
+          button {
+            margin-top: 15px;
+            width: 52px;
+            max-width: 52px;
+            height: 30px;
+            color: var(--text-color);
+            background: var(--hexagon-color);
+            border-color: var(--hexagon-color);
+            border-width: 0;
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            hyphens: auto;
+            word-wrap: break-word;
+            text-align: center;
+            font-weight: bold;
+            font-size: 8px;
+            line-height: 12px;
+            font-family: 'Open Sans', sans-serif;
+            filter: drop-shadow(0 0 0.5rem #ffffff80);
+          }
+
+          a.button:any-link:hover,
+          button:hover {
+            background: var(--hexagon-hover-color);
+            border-color: var(--hexagon-hover-color);
+          }
+
+          a.button:any-link::before,
+          button::before {
+            content: ' ';
+            width: 0;
+            height: 0;
+            left: 0;
+            border-bottom: 15px solid;
+            border-color: inherit;
+            border-left: 26px solid transparent;
+            border-right: 26px solid transparent;
+            position: absolute;
+            top: -15px;
+          }
+
+          a.button:any-link::after,
+          button::after {
+            content: '';
+            width: 0;
+            left: 0;
+            position: absolute;
+            bottom: -15px;
+            border-top: 15px solid;
+            border-color: inherit;
+            border-left: 26px solid transparent;
+            border-right: 26px solid transparent;
+          }
+
+          .icon {
+            height: 32px !important;
+            width: 32px !important;
+          }
+        }
+      }
+
+      p {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .icon img {
+          filter: invert(100%) sepia(0%) saturate(3839%) hue-rotate(328deg) brightness(115%)
+            contrast(101%);
+        }
+
+        a {
+          color: var(--text-color);
+        }
+      }
+    }
+
+    form {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      margin: auto;
+
+      .field-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        input,
+        textarea {
+          border: 0;
+          border-bottom: 1px solid #e5e5e5;
+          border-radius: 0;
+          background-color: transparent;
+          width: 100%;
+          font-size: 1.25rem;
+          margin-bottom: 1rem;
+          padding: 0.75rem 0.6rem;
+          box-sizing: border-box;
+          color: var(--text-color);
+        }
+
+        input[type='text-field'],
+        input[type='tel'],
+        textarea,
+        .field-wrapper {
+          width: 100%;
+        }
+
+        textarea {
+          height: 90px;
+        }
+
+        .icon-send {
+          width: 48px;
+          height: 48px;
+
+          img {
+            filter: invert(10%) sepia(98%) saturate(5398%) hue-rotate(357deg) brightness(97%)
+              contrast(98%);
+          }
+        }
+      }
+
+      .form-text-area-wrapper,
+      .form-submit-wrapper {
+        grid-column: 1 / -1;
+      }
+
+      .form-submit-wrapper {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media (width <= 768px) {
+  .contact-wrapper .contact {
+    > div {
+      flex-direction: column;
+      padding: 16px;
+
+      .contact-info {
+        font-size: 16px;
+      }
+
+      .form-submit-wrapper {
+        margin: 32px 0;
+      }
+    }
+  }
+}

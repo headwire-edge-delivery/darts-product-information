@@ -15,4 +15,8 @@ export default async function decorate(block) {
 
   // decorate footer DOM
   while (fragment.firstElementChild) block.append(fragment.firstElementChild);
+
+  block.querySelectorAll('img[data-icon-name]').forEach((img) => {
+    img.alt = `${img.dataset.iconName} icon`;
+  });
 }
