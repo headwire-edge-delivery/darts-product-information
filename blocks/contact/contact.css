@@ -30,6 +30,21 @@
           text-align: center;
         }
 
+        .contact-info {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: start !important;
+          gap: 0 !important;
+          margin: 16px;
+
+          .contact-info-line {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+          }
+        }
+
         .social-icons {
           display: flex;
           justify-content: center;

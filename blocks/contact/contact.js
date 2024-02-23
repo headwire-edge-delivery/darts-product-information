@@ -230,6 +230,25 @@ function wrapContactInfo() {
     }
   });
   wrapNeighborElements('contact-info', 'contact-wrapper');
+
+  const contactInfo = document.querySelectorAll('.contact-info');
+  contactInfo.forEach((info) => {
+    const children = info.childNodes;
+    let currentGroup = [];
+    children.forEach((child) => {
+      currentGroup.push(child);
+      const next = child.nextElementSibling;
+      if (!next || !next.matches('span, a')) {
+        if (currentGroup.length > 1) {
+          const wrapper = document.createElement('div');
+          wrapper.classList.add('contact-info-line');
+          child.parentElement.insertBefore(wrapper, currentGroup[0]);
+          currentGroup.forEach((el) => wrapper.appendChild(el));
+        }
+        currentGroup = [];
+      }
+    });
+  });
 }
 
 wrapNeighborElements('button-container', 'social-icons');
