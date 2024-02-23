@@ -223,11 +223,14 @@ function wrapNeighborElements(findClassName, wrapperClassName) {
   });
 }
 
-document.querySelectorAll('p').forEach((p) => {
-  if (p.querySelector('span.icon') && p.classList.length === 0) {
-    p.classList.add('contact-info');
-  }
-});
+function wrapContactInfo() {
+  document.querySelectorAll('p').forEach((p) => {
+    if (p.querySelector('span.icon') && p.classList.length === 0) {
+      p.classList.add('contact-info');
+    }
+  });
+  wrapNeighborElements('contact-info', 'contact-wrapper');
+}
 
 wrapNeighborElements('button-container', 'social-icons');
-wrapNeighborElements('contact-info', 'contact-wrapper');
+wrapContactInfo();
