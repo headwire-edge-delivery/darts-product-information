@@ -12,7 +12,6 @@ import {
   loadBlocks,
   loadCSS,
 } from './aem.js';
-import './motion.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
