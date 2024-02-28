@@ -172,6 +172,11 @@ main {
   padding-top: 160px;
 }
 
+/* if main has a .modal-active element, then make itself a red bg */
+body.modal-active main {
+  z-index: 9999991 !important;
+}
+
 a:any-link {
   color: var(--link-color);
   text-decoration: none;
@@ -206,6 +211,7 @@ button {
   line-height: 24px;
   font-family: 'Open Sans', sans-serif;
   filter: drop-shadow(0 0 0.5rem #ffffff80);
+  cursor: pointer;
 }
 
 a.button:any-link:hover,
@@ -295,13 +301,7 @@ main img {
 }
 
 main .section {
-  padding: 64px 16px;
-}
-
-@media (width >= 600px) {
-  main .section {
-    padding: 64px 32px;
-  }
+  padding: 2rem 1rem;
 }
 
 @media (width >= 900px) {
@@ -321,8 +321,12 @@ main .section.highlight {
 
 .glass-bg {
   background: #d9d9d90d;
-  border-radius: 16px;
+  border-radius: 1rem;
   box-shadow: 0 4px 30px #0000001a;
   backdrop-filter: blur(5px);
-  padding: 16px;
+  padding: 1rem;
+}
+
+.hidden {
+  display: none;
 }
