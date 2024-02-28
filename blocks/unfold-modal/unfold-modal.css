@@ -1,0 +1,166 @@
+html.modal-active,
+body.modal-active {
+  overflow: hidden;
+}
+
+.unfold-modal-container {
+  width: fit-content;
+
+  .modal-button-container {
+    margin-top: 1rem;
+  }
+}
+
+.modal-active .modal-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999998 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000c;
+
+  .modal-open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5%;
+
+    > * {
+      width: max(75%, 300px);
+    }
+
+    .modal-close {
+      display: flex;
+      justify-content: flex-end;
+
+      .icon {
+        height: 48px;
+        width: 48px;
+
+        img {
+          filter: invert(100%) sepia(0%) saturate(3839%) hue-rotate(328deg) brightness(115%)
+            contrast(101%);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+#modal-container {
+  position: fixed;
+  place-self: center;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+#modal-container.modal-open {
+  transform: scaleY(0.01) scaleX(0);
+  animation: unfold-in 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.modal-open.out {
+  transform: scale(1);
+  animation: unfold-out 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container .modal-background {
+  display: table-cell;
+  background: #000c;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#modal-container .modal-background .modal {
+  background: white;
+  padding: 50px;
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: 300;
+  position: relative;
+}
+
+#modal-container.modal-open .modal-background .modal {
+  transform: scale(0);
+  animation: zoom-in 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  cursor: default;
+}
+
+#modal-container.modal-open.out .modal-background .modal {
+  animation: zoom-out 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container .modal-background .modal h2 {
+  font-size: 25px;
+  line-height: 25px;
+  margin-bottom: 15px;
+}
+
+#modal-container .modal-background .modal p {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.modal-button {
+  cursor: pointer;
+  width: fit-content;
+}
+
+@keyframes unfold-in {
+  0% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfold-out {
+  0% {
+    transform: scaleY(1) scaleX(1);
+  }
+
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+
+  100% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
