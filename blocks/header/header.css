@@ -33,7 +33,7 @@ header {
 .menu .nav-items li,
 .hamburger-menu,
 .hexagon-logo {
-  filter: drop-shadow(0 0 0.5rem #ffffff80);
+  filter: drop-shadow(var(--hexagon-drop-shadow));
 }
 
 .hexagon-menu {

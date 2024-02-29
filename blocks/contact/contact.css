@@ -71,7 +71,7 @@
             font-size: 8px;
             line-height: 12px;
             font-family: 'Open Sans', sans-serif;
-            filter: drop-shadow(0 0 0.5rem #ffffff80);
+            filter: drop-shadow(var(--hexagon-drop-shadow));
           }
 
           a.button:any-link:hover,
