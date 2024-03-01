@@ -181,6 +181,25 @@ main {
   padding-top: 160px;
 }
 
+body.boxed main {
+  width: 80%;
+  margin: auto;
+}
+
+@media (width >= 1151px) {
+  body.boxed main {
+    width: 60%;
+    margin: auto;
+  }
+}
+
+@media (width <= 768px) {
+  body.boxed main {
+    width: 90%;
+    margin: auto;
+  }
+}
+
 /* if main has a .modal-active element, then make itself a red bg */
 body.modal-active main {
   z-index: 9999991 !important;
@@ -197,6 +216,8 @@ a:hover {
 }
 
 /* buttons */
+
+/* only apply to a.button:any-link it if it's not inside .enzuzo-cookiebanner-container */
 
 a.button:any-link,
 button {
@@ -255,6 +276,15 @@ button::after {
   border-left: 52px solid transparent;
   border-right: 52px solid transparent;
 }
+
+/* stylelint-disable */
+.enzuzo-cookieButtonWrap *,
+.enzuzo-cookieButtonWrap *::before,
+.enzuzo-cookieButtonWrap *::after {
+  content: none;
+  filter: none;
+}
+/* stylelint-enable */
 
 main input {
   font-size: 1.25rem;
@@ -338,4 +368,8 @@ main .section.highlight {
 
 .hidden {
   display: none;
+}
+
+.text-center {
+  text-align: center;
 }
