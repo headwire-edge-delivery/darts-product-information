@@ -27,10 +27,8 @@ function addModalButton() {
   const modalContainer = document.createElement('div');
   modalContainer.id = 'modal-container';
   modalContainer.classList.add('modal-container');
-  /* create a closebutton */
   const closeButton = document.createElement('div');
   closeButton.classList.add('modal-close');
-  // add the x.svg as an img
   closeButton.innerHTML =
     '<span tabindex=0 class="icon icon-close"><img data-icon-name="close" alt="close-icon" src="/icons/x.svg" loading="lazy"></span>';
 

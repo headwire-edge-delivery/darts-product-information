@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import decorateHeaderSearch from './header-search.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 768px)');
@@ -214,7 +215,8 @@ export default async function decorate(block) {
   const hamburgerMenu = document.getElementById('toggle-checker');
   const mobileMenu = document.getElementsByClassName('nav-items-mobile')[0];
   const mobileNavBackground = document.getElementsByClassName('mobile-nav-background')[0];
-  hamburgerMenu.addEventListener('click', () => {
+
+  function toggleMobileNav() {
     mobileNavOpen = !mobileNavOpen;
     if (mobileNavOpen) {
       mobileMenu.classList.add('nav-items-mobile-open');
@@ -227,5 +229,14 @@ export default async function decorate(block) {
       document.body.style.overflow = 'auto';
       document.body.style.position = '';
     }
+  }
+
+  const searchLinks = mobileMenu.querySelectorAll('a:has(.icon-search)');
+  searchLinks.forEach((link) => {
+    link.addEventListener('click', toggleMobileNav);
   });
+
+  hamburgerMenu.addEventListener('click', toggleMobileNav);
+
+  decorateHeaderSearch(block);
 }

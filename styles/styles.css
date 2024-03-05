@@ -14,13 +14,15 @@
   /* colors */
   --link-color: #d40c0c;
   --link-hover-color: #c00707;
-  --background-color: #fff;
+  --background-color: #242424;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #fff;
   --primary-text-color: #000;
   --hexagon-color: #242424e6;
   --hexagon-hover-color: #242424;
+  --icon-color-filter: invert(100%) sepia(0%) saturate(3839%) hue-rotate(328deg) brightness(115%)
+    contrast(101%);
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback;
@@ -57,10 +59,10 @@
 
 @media (width >= 900px) {
   :root {
-    --heading-font-size-xxl: 60px;
+    --heading-font-size-xxl: 3.75rem;
     --heading-font-size-xl: 48px;
     --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
+    --heading-font-size-m: 1.875rem;
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
   }
@@ -178,7 +180,7 @@ pre {
 main {
   position: relative;
   z-index: 1;
-  padding-top: 160px;
+  padding-top: 13.75rem;
 }
 
 body.boxed main {
@@ -221,10 +223,10 @@ a:hover {
 
 a.button:any-link,
 button {
-  margin-top: 30px;
-  width: 104px;
-  max-width: 104px;
-  height: 60px;
+  margin-top: 1.875rem;
+  width: 6.5rem;
+  max-width: 6.5rem;
+  height: 3.75rem;
   color: var(--text-color);
   background: var(--hexagon-color);
   border-color: var(--hexagon-color);
@@ -237,8 +239,8 @@ button {
   word-wrap: break-word;
   text-align: center;
   font-weight: bold;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-family: 'Open Sans', sans-serif;
   filter: drop-shadow(var(--hexagon-drop-shadow));
   cursor: pointer;
@@ -256,12 +258,12 @@ button::before {
   width: 0;
   height: 0;
   left: 0;
-  border-bottom: 30px solid;
+  border-bottom: 1.875rem solid;
   border-color: inherit;
   border-left: 52px solid transparent;
   border-right: 52px solid transparent;
   position: absolute;
-  top: -30px;
+  top: -1.875rem;
 }
 
 a.button:any-link::after,
@@ -270,8 +272,8 @@ button::after {
   width: 0;
   left: 0;
   position: absolute;
-  bottom: -30px;
-  border-top: 30px solid;
+  bottom: -1.875rem;
+  border-top: 1.875rem solid;
   border-color: inherit;
   border-left: 52px solid transparent;
   border-right: 52px solid transparent;
@@ -290,14 +292,26 @@ main input {
   font-size: 1.25rem;
   width: 100%;
   display: block;
-  margin-bottom: 1rem;
   padding: 0.75rem 0.6rem;
   border-radius: 0.25rem;
   box-sizing: border-box;
   border: 1px solid var(--text-color);
   color: var(--text-color);
   background-color: var(--background-color);
+  filter: drop-shadow(var(--hexagon-drop-shadow));
 }
+
+/* stylelint-disable */
+main input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>')
+    no-repeat;
+  background-size: 1em;
+  cursor: pointer;
+}
+/* stylelint-enable */
 
 main input:hover {
   border: 1px solid var(--text-color);
@@ -361,7 +375,7 @@ main .section.highlight {
 .glass-bg {
   background: #d9d9d90d;
   border-radius: 1rem;
-  box-shadow: 0 4px 30px #0000001a;
+  box-shadow: 0 4px 1.875rem #0000001a;
   backdrop-filter: blur(5px);
   padding: 1rem;
 }
@@ -372,4 +386,32 @@ main .section.highlight {
 
 .text-center {
   text-align: center;
+}
+
+@keyframes unfold-in {
+  0% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfold-out {
+  0% {
+    transform: scaleY(1) scaleX(1);
+  }
+
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+
+  100% {
+    transform: scaleY(0.005) scaleX(0);
+  }
 }
