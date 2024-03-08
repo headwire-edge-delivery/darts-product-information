@@ -204,7 +204,7 @@ async function handleSearch(e, block, config) {
     .split(/\s+/)
     .filter((term) => !!term);
 
-  const data = await fetchData(config.source);
+  const data = await fetchData(`${config.source}?sheet=default`);
   const filteredData = filterData(searchTerms, data);
   await renderResults(block, config, filteredData, searchTerms);
 }
