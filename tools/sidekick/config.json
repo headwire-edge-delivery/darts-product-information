@@ -1,0 +1,12 @@
+{
+  "project": "Darts Product Information",
+  "plugins": [
+    {
+      "id": "library",
+      "title": "Block Library",
+      "environments": ["edit"],
+      "url": "/tools/sidekick/library.html?path=/tools/sidekick/blocks/authoring-guide&index=0",
+      "includePaths": ["**.docx**"]
+    }
+  ]
+}
