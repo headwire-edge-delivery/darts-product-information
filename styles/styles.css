@@ -207,6 +207,11 @@ body.modal-active main {
   z-index: 9999991 !important;
 }
 
+/* used for the sidekick library */
+body:has(header[style*='display: none;']) main {
+  padding-top: 0;
+}
+
 a:any-link {
   color: var(--link-color);
   text-decoration: none;
