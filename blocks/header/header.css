@@ -27,7 +27,12 @@ header {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  margin-top: 1.75rem;
   gap: 1rem;
+
+  a {
+    color: var(--text-color) !important;
+  }
 
   li .icon img {
     filter: var(--icon-color-filter);
@@ -35,7 +40,7 @@ header {
 }
 
 .menu .nav-items li,
-.hamburger-menu,
+.hamburger-menu-container,
 .hexagon-logo {
   filter: drop-shadow(var(--hexagon-drop-shadow));
 }
@@ -43,7 +48,7 @@ header {
 .hexagon-menu {
   align-items: center;
   max-width: 6.5rem;
-  margin-top: 28px;
+  margin-top: 1.75rem;
 }
 
 .hexagon-logo {
@@ -66,77 +71,13 @@ header {
   fill: var(--text-color) !important;
 }
 
-.hex a,
-.hex label {
-  margin-top: 1.875rem;
-  width: 6.5rem;
-  max-width: 6.5rem;
-  height: 3.75rem;
-  color: var(--text-color);
-  background: var(--hexagon-color);
-  border-color: var(--hexagon-color);
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  hyphens: auto;
-  word-wrap: break-word;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.hex label {
-  margin-top: 58px;
-  color: var(--link-color);
-}
-
-.hex label:hover {
-  color: var(--link-hover-color);
-}
-
-.hex a::before,
-.hex label::before {
-  content: ' ';
-  width: 0;
-  height: 0;
-  left: 0;
-  border-bottom: 1.875rem solid;
-  border-color: inherit;
-  border-left: 52px solid transparent;
-  border-right: 52px solid transparent;
-  position: absolute;
-  top: -1.875rem;
-}
-
-.hex a::after,
-.hex label::after {
-  content: '';
-  width: 0;
-  left: 0;
-  position: absolute;
-  bottom: -1.875rem;
-  border-top: 1.875rem solid;
-  border-color: inherit;
-  border-left: 52px solid transparent;
-  border-right: 52px solid transparent;
-}
-
-.hex a:hover,
-.hex label:hover {
-  background: var(--hexagon-hover-color);
-  border-color: var(--hexagon-hover-color);
-}
-
 .menu [class^='nav-items-mobile'],
 .hamburger-menu {
   display: none;
 }
 
 .menu .nav-items-mobile-open {
-  top: 118px;
+  top: 7.5rem;
   flex-direction: column;
   padding: 0;
   gap: 0 !important;
@@ -150,7 +91,7 @@ header {
   align-items: center;
   margin: 0;
   padding: 0;
-  margin-top: 8px;
+  margin-top: -1.5rem;
   gap: 8px;
 }
 
@@ -161,6 +102,10 @@ header {
   width: 100dvw;
   height: 100lvh;
   z-index: 23;
+}
+
+.header-search-input {
+  filter: drop-shadow(var(--hexagon-drop-shadow));
 }
 
 @media (width <= 768px) {
@@ -175,6 +120,9 @@ header {
 
   .hamburger-menu {
     display: flex;
+    height: 7.5rem;
+    margin-top: 1.75rem;
+    aspect-ratio: var(--hexagon-aspect-ratio);
   }
 
   .menu {
@@ -183,46 +131,48 @@ header {
 }
 
 .checkboxtoggler {
-  width: 3em;
   display: flex;
   flex-direction: column;
-  gap: 0.7em;
+  gap: 0.9rem;
   cursor: pointer;
+  aspect-ratio: 1;
+  height: 3rem;
+  width: 3rem;
 }
 
 .line-1 {
   background: var(--link-color);
-  height: 0.4em;
-  border-radius: 10em;
+  height: 0.4rem;
+  border-radius: 10rem;
   transition-duration: 500ms;
 }
 
 .line-2 {
   background: var(--link-color);
-  height: 0.4em;
-  border-radius: 10em;
+  height: 0.4rem;
+  border-radius: 10rem;
   transition-duration: 500ms;
 }
 
 .line-3 {
   background: var(--link-color);
-  height: 0.4em;
-  border-radius: 10em;
+  height: 0.4rem;
+  border-radius: 10rem;
   transition-duration: 500ms;
 }
 
 #toggle-checker {
-  height: 3em;
+  height: 3rem;
   width: 100%;
   display: none;
 }
 
 #toggle-checker:checked + #toggler-label .checkboxtoggler .line-1 {
-  transform: rotate(45deg) translateY(0.7em) translateX(0.7em);
+  transform: rotate(45deg) translateY(0.9rem) translateX(0.9rem);
 }
 
 #toggle-checker:checked + #toggler-label .checkboxtoggler .line-2 {
-  transform: rotate(-45deg) translateY(0) translateX(0.1em);
+  transform: rotate(-45deg) translateY(0) translateX(0.1rem);
 }
 
 #toggle-checker:checked + #toggler-label .checkboxtoggler .line-3 {

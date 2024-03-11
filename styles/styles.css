@@ -303,7 +303,6 @@ main input {
   border: 1px solid var(--text-color);
   color: var(--text-color);
   background-color: var(--background-color);
-  filter: drop-shadow(var(--hexagon-drop-shadow));
 }
 
 /* stylelint-disable */
@@ -366,6 +365,38 @@ main .section {
   .section > div {
     margin: auto;
   }
+}
+
+/* hexagons */
+.hex label,
+.hex a {
+  color: var(--link-color);
+  hyphens: auto;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.hex label:hover {
+  color: var(--link-hover-color);
+}
+
+.hex {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background-color: var(--hexagon-color);
+  cursor: pointer;
+  aspect-ratio: var(--hexagon-aspect-ratio);
+  width: 6.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hex:hover {
+  background-color: var(--hexagon-hover-color);
 }
 
 /* section metadata */
