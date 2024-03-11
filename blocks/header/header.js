@@ -192,6 +192,7 @@ export default async function decorate(block) {
       .join('')}
     </ul>
     
+    <div class="hamburger-menu-container">
     <div class="hex hamburger-menu">
       <input id="toggle-checker" type="checkbox">
 <label id="toggler-label" for="toggle-checker">
@@ -199,6 +200,7 @@ export default async function decorate(block) {
     <div class="line-1"></div>
     <div class="line-2"></div>
     <div class="line-3"></div>
+  </div>
   </div>
 </label></div>
     <div class='nav-items-mobile'>${mobileNavArray
