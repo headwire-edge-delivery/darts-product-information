@@ -4,10 +4,15 @@
   .darts-feature-card-image {
     position: relative;
     z-index: 25;
+
+    & > div {
+      margin-top: 50px;
+    }
   }
 
   .darts-feature-item-container {
     display: flex;
+    height: 100px;
 
     div[class^='darts-feature-item-'] {
       position: relative;
@@ -35,6 +40,10 @@
       left: 0;
       top: 0;
       position: absolute;
+
+      & > div {
+        margin-top: 0;
+      }
     }
 
     .darts-feature-item-container {

@@ -96,7 +96,7 @@
 
   @layer mobile {
     .screenshot.mobile.block {
-      width: 360px;
+      width: fit-content;
       height: 100%;
       position: relative;
       margin: auto;

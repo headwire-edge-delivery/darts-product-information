@@ -1,4 +1,4 @@
-import { decorateButtons } from '../../scripts/aem.js';
+import { decorateButtons } from '../../scripts/aem.min.js';
 
 export default async function decorate(block) {
   decorateButtons(block);

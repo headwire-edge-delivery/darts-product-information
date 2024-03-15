@@ -180,7 +180,7 @@ pre {
 main {
   position: relative;
   z-index: 1;
-  padding-top: 13.75rem;
+  padding-top: 10.5rem;
 }
 
 body.boxed main {
@@ -223,65 +223,10 @@ a:hover {
 }
 
 /* buttons */
-
-/* only apply to a.button:any-link it if it's not inside .enzuzo-cookiebanner-container */
-
-a.button:any-link,
 button {
-  margin-top: 1.875rem;
-  width: 6.5rem;
-  max-width: 6.5rem;
-  height: 3.75rem;
+  background-color: transparent;
+  border: none;
   color: var(--text-color);
-  background: var(--hexagon-color);
-  border-color: var(--hexagon-color);
-  border-width: 0;
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  hyphens: auto;
-  word-wrap: break-word;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-family: 'Open Sans', sans-serif;
-  filter: drop-shadow(var(--hexagon-drop-shadow));
-  cursor: pointer;
-}
-
-a.button:any-link:hover,
-button:hover {
-  background: var(--hexagon-hover-color);
-  border-color: var(--hexagon-hover-color);
-}
-
-a.button:any-link::before,
-button::before {
-  content: ' ';
-  width: 0;
-  height: 0;
-  left: 0;
-  border-bottom: 1.875rem solid;
-  border-color: inherit;
-  border-left: 52px solid transparent;
-  border-right: 52px solid transparent;
-  position: absolute;
-  top: -1.875rem;
-}
-
-a.button:any-link::after,
-button::after {
-  content: '';
-  width: 0;
-  left: 0;
-  position: absolute;
-  bottom: -1.875rem;
-  border-top: 1.875rem solid;
-  border-color: inherit;
-  border-left: 52px solid transparent;
-  border-right: 52px solid transparent;
 }
 
 /* stylelint-disable */
@@ -368,9 +313,14 @@ main .section {
 }
 
 /* hexagons */
+*:has(> .hex),
+.button-container {
+  filter: drop-shadow(var(--hexagon-drop-shadow));
+}
+
 .hex label,
 .hex a {
-  color: var(--link-color);
+  color: var(--text-color);
   hyphens: auto;
   word-wrap: break-word;
   text-align: center;
@@ -378,6 +328,7 @@ main .section {
   font-size: 1rem;
   line-height: 1.5rem;
   font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
 }
 
 .hex label:hover {

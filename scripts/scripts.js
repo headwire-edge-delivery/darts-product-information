@@ -11,7 +11,7 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
-} from './aem.js';
+} from './aem.min.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 

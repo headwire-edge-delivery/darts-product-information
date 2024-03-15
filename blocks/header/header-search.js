@@ -73,8 +73,10 @@ export default function decorateHeaderSearch(block) {
     });
   }
   const searchButton = document.createElement('button');
-  searchButton.innerText = 'Search';
-  searchButton.classList.add('button', 'search-button');
+  const searchButtonText = document.createElement('span');
+  searchButtonText.innerText = 'Search';
+  searchButton.append(searchButtonText);
+  searchButton.classList.add('button', 'search-button', 'hex');
   searchButton.addEventListener('click', searchButtonClickHandler);
 
   const searchWrapper = document.createElement('div');

@@ -33,7 +33,7 @@ export default function generateDFC() {
     if (window.innerWidth > 1100) {
       // horizontal View
       itemContainer.childNodes.forEach((item) => {
-        item.style.marginTop = `-${calculatedImgHeight}px`;
+        item.style.marginTop = `-${calculatedImgHeight + 50}px`;
       });
 
       document.querySelector('.darts-feature-card').style.maxWidth = `${imgWidth}px`;

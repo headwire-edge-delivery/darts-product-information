@@ -48,68 +48,12 @@
         .social-icons {
           display: flex;
           justify-content: center;
+          transform: scale(0.5);
           gap: 16px;
 
-          a.button:any-link,
-          button {
-            margin-top: 15px;
-            width: 52px;
-            max-width: 52px;
-            height: 30px;
-            color: var(--text-color);
-            background: var(--hexagon-color);
-            border-color: var(--hexagon-color);
-            border-width: 0;
-            position: relative;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            hyphens: auto;
-            word-wrap: break-word;
-            text-align: center;
-            font-weight: bold;
-            font-size: 8px;
-            line-height: 12px;
-            font-family: 'Open Sans', sans-serif;
-            filter: drop-shadow(var(--hexagon-drop-shadow));
-          }
-
-          a.button:any-link:hover,
-          button:hover {
-            background: var(--hexagon-hover-color);
-            border-color: var(--hexagon-hover-color);
-          }
-
-          a.button:any-link::before,
-          button::before {
-            content: ' ';
-            width: 0;
-            height: 0;
-            left: 0;
-            border-bottom: 15px solid;
-            border-color: inherit;
-            border-left: 26px solid transparent;
-            border-right: 26px solid transparent;
-            position: absolute;
-            top: -15px;
-          }
-
-          a.button:any-link::after,
-          button::after {
-            content: '';
-            width: 0;
-            left: 0;
-            position: absolute;
-            bottom: -15px;
-            border-top: 15px solid;
-            border-color: inherit;
-            border-left: 26px solid transparent;
-            border-right: 26px solid transparent;
-          }
-
           .icon {
-            height: 32px !important;
-            width: 32px !important;
+            height: 64px !important;
+            width: 64px !important;
           }
         }
       }

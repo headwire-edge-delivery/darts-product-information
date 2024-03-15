@@ -59,6 +59,5 @@ export default async function decorateBlock(block) {
     // set img as background img inside framecontainer
     const img = picture.querySelector('img');
     img.setAttribute('loading', 'eager');
-    frameContainer.setAttribute('style', `background-image: url('${img.src}')`);
   }
 }
