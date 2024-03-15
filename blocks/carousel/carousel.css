@@ -91,10 +91,6 @@
     justify-content: center;
     align-items: center;
   }
-
-  :has(button) {
-    filter: drop-shadow(var(--hexagon-drop-shadow));
-  }
 }
 
 .carousel .carousel-slide-indicator button span {

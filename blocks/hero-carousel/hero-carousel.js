@@ -88,6 +88,8 @@ function bindEvents(block) {
   // Resume auto-slide when user interaction ends
   block.addEventListener('mouseleave', resumeAutoSlide);
   block.addEventListener('focusout', resumeAutoSlide);
+
+  resumeAutoSlide();
 }
 
 function createSlide(row, slideIndex, carouselId) {
@@ -131,13 +133,13 @@ export default async function decorate(block) {
   if (!isSingleSlide) {
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('hero-carousel-navigation-buttons');
-    slideNavButtons.innerHTML = `
-      <div type="button" class="slide-prev hero-carousel-button hex" aria-label="${
+    slideNavButtons.innerHTML = `<div class="button-container">
+      <div type="button" tabindex="0" class="slide-prev hero-carousel-button hex" aria-label="${
         placeholders.previousSlide || 'Previous Slide'
-      }"><span class="icon icon-chevron-left"><img data-icon-name="chevron-left" alt="chevron-left-icon" src="/icons/chevron-left.svg" loading="lazy"></span></div>
-      <div type="button" class="slide-next hero-carousel-button hex" aria-label="${
+      }"><span class="icon icon-chevron-left"><img data-icon-name="chevron-left" alt="chevron-left-icon" src="/icons/chevron-left.svg" loading="lazy"></span></div></div>
+      <div class="button-container"><div type="button" tabindex="0" class="slide-next hero-carousel-button hex" aria-label="${
         placeholders.nextSlide || 'Next Slide'
-      }"><span class="icon icon-chevron-right"><img data-icon-name="chevron-right" alt="chevron-right-icon" src="/icons/chevron-right.svg" loading="lazy"></span></div>
+      }"><span class="icon icon-chevron-right"><img data-icon-name="chevron-right" alt="chevron-right-icon" src="/icons/chevron-right.svg" loading="lazy"></span></div></div>
     `;
 
     container.append(slideNavButtons);

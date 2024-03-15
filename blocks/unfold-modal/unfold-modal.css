@@ -105,4 +105,11 @@ body.modal-active {
 .modal-button {
   cursor: pointer;
   width: fit-content;
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    text-decoration: underline;
+    outline: none;
+  }
 }

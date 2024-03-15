@@ -24,6 +24,7 @@ function toggleSearch(e) {
 function searchButtonClickHandler(e) {
   const searchWrapper = e.target?.closest('.header-search-wrapper');
   const searchInput = searchWrapper?.querySelector('.header-search-input');
+  searchInput.tabIndex = 0;
   const searchValue = searchInput?.value.trim();
   if (searchValue !== '') {
     window.location.href = `/search?q=${searchValue}`;
@@ -43,11 +44,11 @@ function setupSearchInput(searchButton) {
       searchButton.click();
     } else if (e.key === 'Tab') {
       searchWrapper?.classList.remove('active');
-      requestAnimationFrame(() => {
-        searchInput?.toggleAttribute('disabled');
+      /* requestAnimationFrame(() => {
+        // searchInput?.toggleAttribute('disabled');
         const searchNav = document.querySelector('header [href="/search"]');
-        searchNav?.focus();
-      });
+        // searchNav?.focus();
+      }); */
     } else if (e.key === 'Escape') {
       toggleSearch(e);
     }
@@ -78,6 +79,9 @@ export default function decorateHeaderSearch(block) {
   searchButton.append(searchButtonText);
   searchButton.classList.add('button', 'search-button', 'hex');
   searchButton.addEventListener('click', searchButtonClickHandler);
+  const buttonContainer = document.createElement('div');
+  buttonContainer.classList.add('button-container');
+  buttonContainer.append(searchButton);
 
   const searchWrapper = document.createElement('div');
   searchWrapper.classList.add('header-search-wrapper', 'search-modal-background');
@@ -89,16 +93,9 @@ export default function decorateHeaderSearch(block) {
   searchBlock.classList.add('header-search-block', 'glass-bg');
   searchBlock.setAttribute('action', '/search?query=');
   searchBlock.append(setupSearchInput(searchButton));
-  searchBlock.append(searchButton);
+  searchBlock.append(buttonContainer);
 
-  const closeButton = document.createElement('div');
-  closeButton.classList.add('modal-close');
-  closeButton.innerHTML =
-    '<span tabindex=0 class="icon icon-close"><img data-icon-name="close" alt="close-icon" src="/icons/x.svg" loading="lazy"></span>';
-
-  searchContainer.append(closeButton);
-  searchContainer.append(searchBlock);
-  searchWrapper.append(searchContainer);
+  searchWrapper.append(searchBlock);
   document.querySelector('main').appendChild(searchWrapper);
   searchWrapper.addEventListener('click', toggleSearch);
 }

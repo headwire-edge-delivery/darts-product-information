@@ -51,19 +51,45 @@ header {
   filter: drop-shadow(var(--hexagon-drop-shadow));
 }
 
+.hexagon-logo {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+
+    a {
+      outline: none;
+    }
+  }
+}
+
+.hamburger-menu-container:focus,
+.hamburger-menu-container:focus-within,
+.hamburger-menu-container:hover,
+.hexagon-logo:focus,
+.hexagon-logo:focus-within,
+.hexagon-logo:hover,
+.menu .nav-items li:focus,
+.menu .nav-items li:focus-within,
+.menu .nav-items li:hover {
+  filter: drop-shadow(var(--hexagon-focus-drop-shadow));
+
+  .icon {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
 .hexagon-menu {
   align-items: center;
   max-width: 6.5rem;
   margin-top: 1.75rem;
 }
 
-.hexagon-logo {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.hexagon-logo:hover .hexagon-logo-path-1 {
+.hexagon-logo:hover .hexagon-logo-path-1,
+.hexagon-logo:focus .hexagon-logo-path-1 {
   fill: var(--link-hover-color) !important;
 }
 
@@ -73,7 +99,9 @@ header {
 }
 
 .hexagon-logo:hover .hexagon-logo-path-2,
-.hexagon-logo:hover .hexagon-logo-path-3 {
+.hexagon-logo:hover .hexagon-logo-path-3,
+.hexagon-logo:focus .hexagon-logo-path-2,
+.hexagon-logo:focus .hexagon-logo-path-3 {
   fill: var(--text-color) !important;
 }
 

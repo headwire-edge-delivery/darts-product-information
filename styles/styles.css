@@ -47,6 +47,7 @@
 
   /* hexagon */
   --hexagon-drop-shadow: 0 0 0.5rem #ffffff80;
+  --hexagon-focus-drop-shadow: 0 0 1rem #f00;
   --hexagon-aspect-ratio: 1 / 1.1547;
 }
 
@@ -183,6 +184,10 @@ main {
   padding-top: 10.5rem;
 }
 
+main:has(*[data-section-status='loading']) {
+  display: none;
+}
+
 body.boxed main {
   width: 80%;
   margin: auto;
@@ -217,7 +222,8 @@ a:any-link {
   text-decoration: none;
 }
 
-a:hover {
+a:hover,
+a:focus {
   text-decoration: underline;
   color: var(--link-hover-color);
 }
@@ -293,8 +299,8 @@ main img {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 24px;
-  width: 24px;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .icon img {
@@ -316,6 +322,12 @@ main .section {
 *:has(> .hex),
 .button-container {
   filter: drop-shadow(var(--hexagon-drop-shadow));
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    filter: drop-shadow(var(--hexagon-focus-drop-shadow));
+  }
 }
 
 .hex label,
@@ -329,6 +341,11 @@ main .section {
   line-height: 1.5rem;
   font-family: 'Open Sans', sans-serif;
   cursor: pointer;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hex label:hover {
@@ -344,10 +361,13 @@ main .section {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+  outline: none;
 
-.hex:hover {
-  background-color: var(--hexagon-hover-color);
+  &:hover,
+  &:focus,
+  &:focus-within {
+    background-color: var(--hexagon-hover-color);
+  }
 }
 
 /* section metadata */

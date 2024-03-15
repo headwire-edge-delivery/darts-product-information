@@ -128,6 +128,41 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+const cookieBannerPageScoreFixes = () => {
+  function showCookieBanner() {
+    const cookieBanner = document.body.querySelector('#cookie-notification:not(.appear)');
+    if (cookieBanner) {
+      cookieBanner.classList.add('appear');
+    }
+  }
+
+  document.body.addEventListener('scroll', showCookieBanner, { once: true, passive: true });
+  document.body.addEventListener('mousemove', showCookieBanner, { once: true, passive: true });
+  document.body.addEventListener('touchmove', showCookieBanner, { once: true, passive: true });
+  document.body.addEventListener('keydown', showCookieBanner, { once: true, passive: true });
+
+  let intervalRuns = 0;
+  const crawlableLinkFixInterval = setInterval(() => {
+    if (intervalRuns > 9) {
+      clearInterval(crawlableLinkFixInterval);
+    }
+
+    intervalRuns += 1;
+    const javascriptLinks = document.querySelectorAll(
+      '#cookie-notification a[href^="javascript:"]',
+    );
+
+    if (javascriptLinks.length) {
+      javascriptLinks.forEach((link) => {
+        link.href = '#';
+      });
+      clearInterval(crawlableLinkFixInterval);
+    }
+  }, 200);
+};
+
+cookieBannerPageScoreFixes();
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
