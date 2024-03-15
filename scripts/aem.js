@@ -342,7 +342,7 @@ function createOptimizedPicture(
       picture.appendChild(img);
       img.setAttribute('src', `${pathname}?width=${br.width}&format=${ext}&optimize=medium`);
       img.setAttribute('width', `${br.width}`);
-      img.setAttribute('height', `${br.height}`);
+      img.setAttribute('height', `${br.height ?? 'auto'}`);
     }
   });
 

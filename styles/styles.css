@@ -184,7 +184,10 @@ main {
   padding-top: 10.5rem;
 }
 
-main:has(*[data-section-status='loading']) {
+main:has(*[data-section-status='loading']),
+main:has(*[data-block-status='loading']),
+footer:has(*[data-section-status='loading']),
+footer:has(*[data-block-status='loading']) {
   display: none;
 }
 

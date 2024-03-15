@@ -16,7 +16,7 @@ function findNextHeading(el) {
   return h;
 }
 
-function renderResult(result, titleTag) {
+function renderResult(result, titleTag, index = 1) {
   const li = document.createElement('li');
   const a = document.createElement('a');
   a.classList.add('glass-bg');
@@ -27,6 +27,9 @@ function renderResult(result, titleTag) {
     const pic = createOptimizedPicture(result.image, '', false, [{ width: '375' }]);
     wrapper.append(pic);
     a.append(wrapper);
+    if (index === 0) {
+      pic.querySelector('img').loading = 'eager';
+    }
   }
   if (result.title) {
     const title = document.createElement(titleTag);
@@ -53,8 +56,8 @@ async function renderResults(block, filteredData) {
 
   if (filteredData.length) {
     searchResults.classList.remove('no-results');
-    filteredData.forEach((result) => {
-      const li = renderResult(result, headingTag);
+    filteredData.forEach((result, index) => {
+      const li = renderResult(result, headingTag, index);
       searchResults.append(li);
     });
   } else {
