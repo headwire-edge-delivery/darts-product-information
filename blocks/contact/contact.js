@@ -54,7 +54,7 @@ function createButton(fd) {
   button.textContent = isIcon ? '' : fd.Label;
   button.classList.add('button');
   if (isIcon) {
-    button.innerHTML = `<span class="icon icon-${icon}"><img data-icon-name=${icon} alt="${icon}-icon" src="/icons/${icon}.svg" loading="lazy"></span>`;
+    button.innerHTML = `<div class="hex"><span class="icon icon-${icon}"><img data-icon-name=${icon} alt="${icon}-icon" src="/icons/${icon}.svg" loading="lazy"></span></div>`;
   }
   if (fd.Style) button.classList.add(fd.Style);
   if (fd.Type === 'submit') {

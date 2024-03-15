@@ -72,13 +72,6 @@
   color: white;
   position: relative;
   width: var(--slide-content-width, auto);
-
-  a {
-    height: 6rem;
-    width: 5.2rem;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    background-color: #2e2e2e;
-  }
 }
 
 .hero-carousel .hero-carousel-slide .hero-carousel-slide-content.button-container {
@@ -100,16 +93,11 @@
 }
 
 .hero-carousel .hero-carousel-navigation-buttons .hero-carousel-button {
-  margin: 0.5rem;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  filter: drop-shadow(var(--hexagon-drop-shadow));
-  background-color: #2e2e2e;
-  cursor: pointer;
+  transform: scale(0.5);
 
   .icon {
-    height: 3rem !important;
-    width: 2.6rem !important;
-    padding: 0.5rem;
+    height: 6rem !important;
+    width: 5.2rem !important;
 
     img {
       filter: invert(100%) sepia(0%) saturate(3839%) hue-rotate(328deg) brightness(115%)
@@ -124,11 +112,6 @@
       }
     }
   }
-}
-
-.hero-carousel .hero-carousel-navigation-buttons .hero-carousel-button:hover {
-  background: var(--hexagon-hover-color);
-  border-color: var(--hexagon-hover-color);
 }
 
 @media (width >= 600px) {

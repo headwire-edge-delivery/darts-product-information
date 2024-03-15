@@ -1,4 +1,4 @@
-import { createOptimizedPicture, decorateIcons, fetchPlaceholders } from '../../scripts/aem.js';
+import { createOptimizedPicture, decorateIcons, fetchPlaceholders } from '../../scripts/aem.min.js';
 
 function findNextHeading(el) {
   let preceedingEl = el.parentElement.previousElement || el.parentElement.parentElement;

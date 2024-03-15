@@ -12,7 +12,6 @@
 .carousel-container .carousel {
   width: 100%;
   max-width: 650px;
-  aspect-ratio: 1 / 1;
 }
 
 .carousel .carousel-slides-container {
@@ -82,9 +81,10 @@
 .carousel .carousel-slide-indicators {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   max-width: 100%;
   margin-top: 0.5rem;
+  transform: scale(0.5);
 
   .carousel-slide-indicator {
     display: flex;
@@ -97,20 +97,10 @@
   }
 }
 
-.carousel .carousel-slide-indicator button {
-  height: 1.5rem;
-  width: 1.732rem;
-  aspect-ratio: var(--hexagon-aspect-ratio);
-  padding: 0;
-  margin: 0;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background-color: #2e2e2e;
-
-  span {
-    color: transparent;
-    height: 0;
-    width: 0;
-  }
+.carousel .carousel-slide-indicator button span {
+  color: transparent;
+  height: 0;
+  width: 0;
 }
 
 .carousel .carousel-slide-indicator button::before,
@@ -139,15 +129,14 @@
 }
 
 .carousel .carousel-navigation-buttons .carousel-button {
-  margin: 0.5rem;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background-color: #2e2e2e;
   cursor: pointer;
+  transform: scale(0.5);
+  margin: -1rem;
 
   .icon {
-    height: 3rem !important;
-    width: 2.6rem !important;
-    padding: 0.5rem;
+    height: 6rem !important;
+    width: 5.2rem !important;
 
     img {
       filter: invert(100%) sepia(0%) saturate(3839%) hue-rotate(328deg) brightness(115%)

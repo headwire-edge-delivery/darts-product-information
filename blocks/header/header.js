@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata } from '../../scripts/aem.min.js';
 import { loadFragment } from '../fragment/fragment.js';
 import decorateHeaderSearch from './header-search.js';
 
@@ -236,6 +236,9 @@ export default async function decorate(block) {
   const searchLinks = mobileMenu.querySelectorAll('a:has(.icon-search)');
   searchLinks.forEach((link) => {
     link.addEventListener('click', toggleMobileNav);
+    link.addEventListener('click', () => {
+      hamburgerMenu.checked = false;
+    });
   });
 
   hamburgerMenu.addEventListener('click', toggleMobileNav);

@@ -1,4 +1,4 @@
-import { fetchPlaceholders } from '../../scripts/aem.js';
+import { fetchPlaceholders } from '../../scripts/aem.min.js';
 
 function updateActiveSlide(slide) {
   const block = slide.closest('.carousel');
@@ -154,10 +154,10 @@ export default async function decorate(block) {
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-navigation-buttons');
     slideNavButtons.innerHTML = `
-      <div type="button" class="slide-prev carousel-button" aria-label="${
+      <div type="button" class="slide-prev carousel-button hex" aria-label="${
         placeholders.previousSlide || 'Previous Slide'
       }"><span class="icon icon-chevron-left"><img data-icon-name="chevron-left" alt="chevron-left-icon" src="/icons/chevron-left.svg" loading="lazy"></span></div>
-      <div type="button" class="slide-next carousel-button" aria-label="${
+      <div type="button" class="slide-next carousel-button hex" aria-label="${
         placeholders.nextSlide || 'Next Slide'
       }"><span class="icon icon-chevron-right"><img data-icon-name="chevron-right" alt="chevron-right-icon" src="/icons/chevron-right.svg" loading="lazy"></span></div>
     `;
@@ -173,7 +173,7 @@ export default async function decorate(block) {
       const indicator = document.createElement('li');
       indicator.classList.add('carousel-slide-indicator');
       indicator.dataset.targetSlide = idx;
-      indicator.innerHTML = `<button type="button"><span>${
+      indicator.innerHTML = `<button type="button" class="hex"><span>${
         placeholders.showSlide || 'Show Slide'
       } ${idx + 1} ${placeholders.of || 'of'} ${rows.length}</span></button>`;
       slideIndicators.append(indicator);

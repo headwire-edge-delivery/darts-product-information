@@ -1,6 +1,7 @@
 .product-display-wrapper {
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 
   .product-display {
     display: flex;

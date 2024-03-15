@@ -309,7 +309,12 @@ function createOptimizedPicture(
   eager = false,
   breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }],
 ) {
-  const url = new URL(src, window.location.href);
+  const url = new URL(
+    src,
+    window.location.href.startsWith('http')
+      ? window.location.href
+      : 'https://main--darts-product-information--headwire-edge-delivery.hlx.page/',
+  );
   const picture = document.createElement('picture');
   const { pathname } = url;
   const ext = pathname.substring(pathname.lastIndexOf('.') + 1);
@@ -372,7 +377,9 @@ function decorateButtons(element) {
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button'; // default
-          up.classList.add('button-container');
+          if (!a.href.endsWith('contact.json')) {
+            up.classList.add('button-container');
+          }
         }
         if (
           up.childNodes.length === 1 &&
@@ -392,6 +399,13 @@ function decorateButtons(element) {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
         }
+      }
+
+      if (up.classList.contains('button-container')) {
+        const hex = document.createElement('div');
+        hex.className = 'hex';
+        up.insertBefore(hex, a);
+        hex.appendChild(a);
       }
     }
   });
