@@ -193,7 +193,7 @@ export default async function decorate(block) {
     </ul>
     
     <div class="hamburger-menu-container">
-    <div class="hex hamburger-menu">
+    <div class="hex hamburger-menu" id="hamburger-menu-wrapper" tabIndex=0>
       <input id="toggle-checker" type="checkbox">
 <label id="toggler-label" for="toggle-checker">
   <div class="checkboxtoggler">
@@ -214,6 +214,7 @@ export default async function decorate(block) {
       </div>
 </nav><div class="mobile-nav-background"/>`;
 
+  const hamburgerMenuWrapper = document.getElementById('hamburger-menu-wrapper');
   const hamburgerMenu = document.getElementById('toggle-checker');
   const mobileMenu = document.getElementsByClassName('nav-items-mobile')[0];
   const mobileNavBackground = document.getElementsByClassName('mobile-nav-background')[0];
@@ -242,6 +243,12 @@ export default async function decorate(block) {
   });
 
   hamburgerMenu.addEventListener('click', toggleMobileNav);
+  hamburgerMenuWrapper.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      hamburgerMenu.checked = !hamburgerMenu.checked;
+      toggleMobileNav();
+    }
+  });
 
   decorateHeaderSearch(block);
 }

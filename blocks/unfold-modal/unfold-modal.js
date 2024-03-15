@@ -3,6 +3,8 @@ function handleClick() {
 
   modalContainer.className = 'modal-open';
   document.body.classList.add('modal-active');
+  const closeButton = document.querySelector('.modal-close span');
+  closeButton.tabIndex = 0;
 }
 
 function addModalButton() {
@@ -30,7 +32,7 @@ function addModalButton() {
   const closeButton = document.createElement('div');
   closeButton.classList.add('modal-close');
   closeButton.innerHTML =
-    '<span tabindex=0 class="icon icon-close"><img data-icon-name="close" alt="close-icon" src="/icons/x.svg" loading="lazy"></span>';
+    '<span tabindex="-1" class="icon icon-close"><img data-icon-name="close" alt="close-icon" src="/icons/x.svg" loading="lazy"></span>';
 
   const closeModal = () => {
     modalContainer.classList.add('out');

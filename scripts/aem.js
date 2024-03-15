@@ -377,6 +377,7 @@ function decorateButtons(element) {
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button'; // default
+          a.ariaLabel = a.ariaLabel || a.title || a.href;
           if (!a.href.endsWith('contact.json')) {
             up.classList.add('button-container');
           }

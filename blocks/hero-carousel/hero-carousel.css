@@ -76,6 +76,12 @@
 
 .hero-carousel .hero-carousel-slide .hero-carousel-slide-content.button-container {
   filter: drop-shadow(var(--hexagon-drop-shadow));
+
+  &:has(.hex:hover),
+  &:has(.hex:focus),
+  &:has(.hex:focus-within) {
+    filter: drop-shadow(var(--hexagon-focus-drop-shadow));
+  }
 }
 
 .hero-carousel .hero-carousel-navigation-buttons {
