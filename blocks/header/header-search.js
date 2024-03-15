@@ -44,11 +44,6 @@ function setupSearchInput(searchButton) {
       searchButton.click();
     } else if (e.key === 'Tab') {
       searchWrapper?.classList.remove('active');
-      /* requestAnimationFrame(() => {
-        // searchInput?.toggleAttribute('disabled');
-        const searchNav = document.querySelector('header [href="/search"]');
-        // searchNav?.focus();
-      }); */
     } else if (e.key === 'Escape') {
       toggleSearch(e);
     }
@@ -66,6 +61,7 @@ export default function decorateHeaderSearch(block) {
 
   const searchLink = block.querySelector('a:has(.icon-search)');
   searchLink.addEventListener('click', toggleSearch);
+  searchLink.setAttribute('aria-label', 'Search');
 
   if (numberOfSearchIcons > 1) {
     const searchLinks = block.querySelectorAll('a:has(.icon-search)');
