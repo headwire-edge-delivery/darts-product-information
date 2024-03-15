@@ -395,6 +395,14 @@ main .section.highlight {
   text-align: center;
 }
 
+#cookie-notification:not(.appear) {
+  display: none !important;
+}
+
+body.sidekick-library #cookie-notification {
+  display: none !important;
+}
+
 @keyframes unfold-in {
   0% {
     transform: scaleY(0.005) scaleX(0);
