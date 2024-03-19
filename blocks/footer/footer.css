@@ -5,8 +5,8 @@ footer {
   width: 100%;
   color: white;
   background: linear-gradient(90deg, #d40c0c 0%, #d9d9d91a 60%);
-  min-height: 148px;
   margin-top: auto;
+  min-height: fit-content;
 }
 
 footer .footer .section .columns-wrapper {

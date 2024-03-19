@@ -326,9 +326,9 @@ main .section {
 }
 
 @media (width >= 900px) {
-  .section > div {
-    margin: auto;
+  .section {
     width: min(100%, 2000px);
+    margin: auto;
   }
 }
 

@@ -57,10 +57,13 @@ function bindEvents(block) {
 
   function pauseAutoSlide() {
     clearInterval(autoSlideInterval);
+    autoSlideInterval = null;
   }
 
   function resumeAutoSlide() {
-    startAutoSlide();
+    if (!autoSlideInterval) {
+      startAutoSlide();
+    }
   }
 
   const slideIndicators = block.querySelector('.carousel-slide-indicators');
@@ -73,22 +76,44 @@ function bindEvents(block) {
     });
   });
 
+  block.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      pauseAutoSlide();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
+      resumeAutoSlide();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      pauseAutoSlide();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+      resumeAutoSlide();
+    }
+  });
+
   block.querySelector('.slide-prev').addEventListener('click', () => {
+    pauseAutoSlide();
     showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
+    resumeAutoSlide();
   });
   block.querySelector('.slide-prev').addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      pauseAutoSlide();
       showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
+      resumeAutoSlide();
     }
   });
   block.querySelector('.slide-next').addEventListener('click', () => {
+    pauseAutoSlide();
     showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+    resumeAutoSlide();
   });
   block.querySelector('.slide-next').addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      pauseAutoSlide();
       showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+      resumeAutoSlide();
     }
   });
 
@@ -107,10 +132,12 @@ function bindEvents(block) {
   // Pause auto-slide on user interaction
   block.addEventListener('mouseenter', pauseAutoSlide);
   block.addEventListener('focusin', pauseAutoSlide);
+  block.addEventListener('touchstart', pauseAutoSlide);
 
   // Resume auto-slide when user interaction ends
   block.addEventListener('mouseleave', resumeAutoSlide);
   block.addEventListener('focusout', resumeAutoSlide);
+  block.addEventListener('touchend', resumeAutoSlide);
 
   resumeAutoSlide();
 }
