@@ -62,11 +62,32 @@ function bindEvents(block) {
     startAutoSlide();
   }
 
+  block.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+    }
+  });
   block.querySelector('.slide-prev').addEventListener('click', () => {
     showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
   });
+  block.querySelector('.slide-prev').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
+    }
+  });
   block.querySelector('.slide-next').addEventListener('click', () => {
     showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+  });
+  block.querySelector('.slide-next').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+    }
   });
 
   const slideObserver = new IntersectionObserver(

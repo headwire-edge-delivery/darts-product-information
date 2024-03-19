@@ -16,13 +16,14 @@
 .products-container ul.all-products {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
-  gap: 16px;
+  gap: 1rem;
   padding-left: 0;
   list-style: none;
 
   > li {
     border: 1px solid var(--dark-color);
-    filter: drop-shadow(var(--hexagon-drop-shadow));
+    box-shadow: var(--hexagon-box-shadow);
+    border-radius: 1rem;
   }
 
   > li > a {
@@ -35,11 +36,13 @@
   > li > a:hover,
   > li > a:focus {
     text-decoration: none;
+    box-shadow: var(--hexagon-focus-box-shadow);
+    outline: none;
   }
 
   > li .product-title,
   > li p {
-    padding: 0 16px;
+    padding: 0 1rem;
   }
 
   > li .product-title {
@@ -71,7 +74,7 @@
 /* no results */
 ul.all-products.no-results {
   display: block;
-  padding-left: 32px;
+  padding-left: 2rem;
 
   > li {
     border: none;

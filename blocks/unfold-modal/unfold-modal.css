@@ -66,12 +66,12 @@ body.modal-active {
 
 #modal-container.modal-open {
   transform: scaleY(0.01) scaleX(0);
-  animation: unfold-in 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  animation: unfold-in 0.75s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 #modal-container.modal-open.out {
   transform: scale(1);
-  animation: unfold-out 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  animation: unfold-out 0.75s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 #modal-container .modal-background {
@@ -105,6 +105,7 @@ body.modal-active {
 .modal-button {
   cursor: pointer;
   width: fit-content;
+  font-weight: bold;
 
   &:hover,
   &:focus,

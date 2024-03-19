@@ -16,13 +16,19 @@
         if (document.referrer) {
           const { origin, pathname } = new URL(document.referrer);
           if (origin === window.location.origin) {
+            const backBtnContainer = document.createElement('p');
+            backBtnContainer.classList.add('button-container');
+            const backBtnWrapper = document.createElement('div');
+            backBtnWrapper.classList.add('hex');
             const backBtn = document.createElement('a');
             backBtn.classList.add('button', 'error-button-back');
             backBtn.href = pathname;
             backBtn.textContent = 'Go back';
             backBtn.title = 'Go back';
-            const btnContainer = document.querySelector('.button-container');
-            btnContainer.append(backBtn);
+            const btns = document.querySelector('.buttons');
+            backBtnWrapper.append(backBtn);
+            backBtnContainer.append(backBtnWrapper);
+            btns.append(backBtnContainer);
           }
         }
         sampleRUM('404', { source: document.referrer, target: window.location.href });
@@ -38,6 +44,7 @@
 
       main.error .section {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
@@ -56,7 +63,7 @@
         color: var(--text-color);
       }
 
-      main.error .button-container {
+      main.error .buttons {
         display: flex;
         justify-content: center;
         gap: 16px;
@@ -135,9 +142,11 @@
           <text x="0" y="17">404</text>
         </svg>
         <h2 class="error-message">Page Not Found</h2>
-        <p class="button-container">
-          <a href="/" class="button secondary error-button-home">Go home</a>
-        </p>
+        <div class="buttons">
+          <p class="button-container">
+            <a href="/" class="button secondary error-button-home">Go home</a>
+          </p>
+        </div>
       </div>
     </main>
     <footer></footer>

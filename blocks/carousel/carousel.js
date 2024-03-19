@@ -76,8 +76,20 @@ function bindEvents(block) {
   block.querySelector('.slide-prev').addEventListener('click', () => {
     showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
   });
+  block.querySelector('.slide-prev').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
+    }
+  });
   block.querySelector('.slide-next').addEventListener('click', () => {
     showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+  });
+  block.querySelector('.slide-next').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+    }
   });
 
   const slideObserver = new IntersectionObserver(

@@ -28,7 +28,8 @@
 
 .search ul.search-results > li {
   border: 1px solid var(--dark-color);
-  filter: drop-shadow(var(--hexagon-drop-shadow));
+  box-shadow: var(--hexagon-box-shadow);
+  border-radius: 1rem;
 }
 
 .search ul.search-results > li > a {
@@ -41,6 +42,8 @@
 .search ul.search-results > li > a:hover,
 .search ul.search-results > li > a:focus {
   text-decoration: none;
+  box-shadow: var(--hexagon-focus-box-shadow);
+  outline: none;
 }
 
 .search ul.search-results > li .search-result-title,
@@ -69,6 +72,7 @@
 .search ul.search-results > li picture img {
   display: block;
   width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 1rem 1rem 0 0;
 }

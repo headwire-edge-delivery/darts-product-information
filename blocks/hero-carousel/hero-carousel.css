@@ -1,6 +1,7 @@
 .hero-carousel-wrapper {
   display: flex;
   justify-content: center;
+  max-width: 100%;
 }
 
 .hero-carousel-container {

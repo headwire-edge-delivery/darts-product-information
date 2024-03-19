@@ -58,6 +58,7 @@ function createButton(fd) {
   }
   if (fd.Style) button.classList.add(fd.Style);
   if (fd.Type === 'submit') {
+    button.classList.add('submit');
     button.addEventListener('click', async (event) => {
       const form = button.closest('form');
       if (fd.Placeholder) form.dataset.action = fd.Placeholder;
@@ -81,11 +82,17 @@ function createHeading(fd, el) {
 
 function createInput(fd) {
   const input = document.createElement('input');
-  input.type = fd.Type;
   input.id = fd.Field;
   input.setAttribute('placeholder', fd.Placeholder);
   if (fd.Mandatory === 'x') {
     input.setAttribute('required', 'required');
+  }
+  if (fd.Format === 'email') {
+    input.type = 'email';
+  } else if (fd.Format === 'tel' || fd.Format === 'phone') {
+    input.type = 'tel';
+  } else {
+    input.type = fd.Type;
   }
   return input;
 }
