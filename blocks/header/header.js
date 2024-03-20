@@ -18,7 +18,7 @@ function closeOnEscape(e) {
     } else if (!isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
+      nav?.querySelector('button').focus();
     }
   }
 }
@@ -58,6 +58,7 @@ function toggleAllNavSections(sections, expanded = false) {
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
 function toggleMenu(nav, navSections, forceExpanded = null) {
+  if (!nav || !navSections) return;
   const expanded =
     forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
@@ -146,7 +147,6 @@ export default async function decorate(block) {
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
@@ -156,7 +156,7 @@ export default async function decorate(block) {
   isDesktop = window.matchMedia(
     `(min-width: ${Math.max((navArray.length * 7.5 + 8.5) * remInPixels, 768)}px)`,
   );
-
+  isDesktop.addEventListener('change', () => decorate(block));
   const mobileNavArray = [];
   const FillMobileNavArray = () => {
     let toggle = false;
@@ -208,15 +208,24 @@ export default async function decorate(block) {
   </div>
   </div>
 </label></div>
-    <div class='nav-items-mobile'>${mobileNavArray
+<dialog class='nav-items-mobile'>
+    <div class="nav-items-container">
+    ${mobileNavArray
       .map(
-        (navContainer) =>
+        (navContainer, index) =>
           `<ul>${navContainer
-            .map((navMobile) => `<li><span class="hex">${navMobile.outerHTML}</span></li>`)
+            .map(
+              (navMobile, i) =>
+                `<li ${
+                  mobileNavArray.length - 1 === index && navContainer.length - 1 === i
+                    ? 'class="last-nav-item"'
+                    : ''
+                }><span class="hex">${navMobile.outerHTML}</span></li>`,
+            )
             .join('')}</ul>`,
       )
       .join('')}
-      </div>
+      </div></dialog>
 </nav><div class="mobile-nav-background"/>`;
 
   const hamburgerMenuWrapper = document.getElementById('hamburger-menu-wrapper');
@@ -226,16 +235,52 @@ export default async function decorate(block) {
 
   function toggleMobileNav() {
     mobileNavOpen = !mobileNavOpen;
+    const menuLogo = document.querySelector('.hexagon-menu');
+    const lastNavItem = mobileMenu.querySelector('.last-nav-item');
     if (mobileNavOpen) {
       mobileMenu.classList.add('nav-items-mobile-open');
       mobileNavBackground.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
+      document.querySelector('header').addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNavOpen) {
+          e.preventDefault();
+          hamburgerMenu.checked = false;
+          toggleMobileNav();
+        }
+      });
+      menuLogo.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab' && e.shiftKey) {
+          e.preventDefault();
+          lastNavItem.querySelector('a').focus();
+        }
+      });
+      lastNavItem.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab' && !e.shiftKey) {
+          e.preventDefault();
+          menuLogo.focus();
+        }
+      });
     } else {
       mobileMenu.classList.remove('nav-items-mobile-open');
       mobileNavBackground.style.display = 'none';
-      document.body.style.overflow = 'auto';
-      document.body.style.position = '';
+      document.querySelector('header').removeEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNavOpen) {
+          e.preventDefault();
+          hamburgerMenu.checked = false;
+          toggleMobileNav();
+        }
+      });
+      menuLogo.removeEventListener('keydown', (e) => {
+        if (e.key === 'Tab' && e.shiftKey) {
+          e.preventDefault();
+          lastNavItem.querySelector('a').focus();
+        }
+      });
+      lastNavItem.removeEventListener('keydown', (e) => {
+        if (e.key === 'Tab' && !e.shiftKey) {
+          e.preventDefault();
+          menuLogo.focus();
+        }
+      });
     }
   }
 
@@ -250,7 +295,12 @@ export default async function decorate(block) {
   hamburgerMenu.addEventListener('click', toggleMobileNav);
   hamburgerMenuWrapper.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
       hamburgerMenu.checked = !hamburgerMenu.checked;
+      toggleMobileNav();
+    } else if (e.key === 'Escape' && mobileNavOpen) {
+      e.preventDefault();
+      hamburgerMenu.checked = false;
       toggleMobileNav();
     }
   });

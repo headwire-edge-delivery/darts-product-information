@@ -45,6 +45,21 @@ header {
   }
 }
 
+.menu dialog.nav-items-mobile {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  top: 9.25rem;
+  border: 0;
+  background-color: transparent;
+
+  .nav-items-container {
+    position: absolute;
+    top: 0;
+  }
+}
+
 .menu .nav-items li,
 .hamburger-menu-container,
 .hexagon-logo {
@@ -132,7 +147,8 @@ header {
 .mobile-nav-background {
   display: none;
   background-color: #ffffffba;
-  position: absolute;
+  position: fixed;
+  top: 0;
   width: 100dvw;
   height: 100lvh;
   z-index: 23;
