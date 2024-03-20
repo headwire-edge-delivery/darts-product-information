@@ -97,6 +97,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
+  const initialBlock = block;
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
@@ -156,7 +157,9 @@ export default async function decorate(block) {
   isDesktop = window.matchMedia(
     `(min-width: ${Math.max((navArray.length * 7.5 + 8.5) * remInPixels, 768)}px)`,
   );
-  isDesktop.addEventListener('change', () => decorate(block));
+  isDesktop.addEventListener('change', () => {
+    decorate(initialBlock);
+  });
   const mobileNavArray = [];
   const FillMobileNavArray = () => {
     let toggle = false;
@@ -305,5 +308,6 @@ export default async function decorate(block) {
     }
   });
 
+  document?.querySelector('.header-search-wrapper')?.remove();
   decorateHeaderSearch(block);
 }

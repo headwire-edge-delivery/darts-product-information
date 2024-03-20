@@ -6,11 +6,11 @@
       display: flex;
       width: 100%;
       background: #d9d9d91a;
-      border-radius: 16px;
+      border-radius: var(--border-radius);
       box-shadow: 0 4px 30px #0000001a;
       backdrop-filter: blur(5px);
       padding: 50px 32px;
-      gap: 16px;
+      gap: var(--gap);
 
       > div {
         width: 100%;
@@ -24,7 +24,7 @@
           flex-direction: column;
           justify-content: space-between;
           background: #d9d9d90d;
-          border-radius: 16px;
+          border-radius: var(--border-radius);
           box-shadow: 0 4px 30px #0000001a;
           backdrop-filter: blur(5px);
           padding: 16px;
@@ -43,7 +43,7 @@
             .contact-info-line {
               display: flex;
               align-items: center;
-              gap: 16px;
+              gap: var(--gap);
               width: 100%;
             }
           }
@@ -52,7 +52,7 @@
             display: flex;
             justify-content: center;
             transform: scale(0.5);
-            gap: 16px;
+            gap: var(--gap);
 
             .icon {
               height: 64px !important;
@@ -64,7 +64,7 @@
         p {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: var(--gap);
 
           .icon img {
             filter: invert(100%) sepia(0%) saturate(3839%) hue-rotate(328deg) brightness(115%)
@@ -81,7 +81,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 16px;
+        gap: var(--gap);
         margin: auto;
 
         .field-wrapper {
@@ -151,10 +151,10 @@
   .contact-wrapper .contact {
     > div {
       flex-direction: column;
-      padding: 16px;
+      padding: var(--body-font-size-s);
 
       .contact-info {
-        font-size: 16px;
+        font-size: var(--body-font-size-s);
       }
 
       .form-submit-wrapper {

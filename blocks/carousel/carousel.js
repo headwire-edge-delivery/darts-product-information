@@ -45,7 +45,6 @@ function showSlide(block, slideIndex = 0) {
 
 function bindEvents(block) {
   let autoSlideInterval;
-
   function startAutoSlide() {
     const changeSlide = () => {
       const activeSlideIndex = parseInt(block.dataset.activeSlide, 10);
@@ -148,15 +147,8 @@ function createSlide(row, slideIndex, carouselId) {
   slide.setAttribute('id', `carousel-${carouselId}-slide-${slideIndex}`);
   slide.classList.add('carousel-slide');
 
-  row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
-    column.classList.add(`carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
-    slide.append(column);
-  });
-
-  const labeledBy = slide.querySelector('h1, h2, h3, h4, h5, h6');
-  if (labeledBy) {
-    slide.setAttribute('aria-labelledby', labeledBy.getAttribute('id'));
-  }
+  row.classList.add('carousel-slide-image');
+  slide.append(row.cloneNode(true));
 
   return slide;
 }
@@ -165,7 +157,7 @@ let carouselId = 0;
 export default async function decorate(block) {
   carouselId += 1;
   block.setAttribute('id', `carousel-${carouselId}`);
-  const rows = block.querySelectorAll(':scope > div');
+  const rows = block.querySelectorAll('picture');
   const isSingleSlide = rows.length < 2;
 
   const placeholders = await fetchPlaceholders();

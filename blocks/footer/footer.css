@@ -33,7 +33,7 @@ footer .footer .section .columns-wrapper {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: var(--gap);
 
     li {
       list-style: none;
@@ -45,13 +45,13 @@ footer .footer .section .columns-wrapper {
     display: flex;
     justify-content: center;
     justify-content: space-evenly;
-    gap: 1rem;
+    gap: var(--gap);
 
     div {
       display: flex;
       align-content: center;
       align-items: center;
-      gap: 16px;
+      gap: var(--gap);
       color: white !important;
 
       a {
