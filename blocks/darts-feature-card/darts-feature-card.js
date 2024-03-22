@@ -1,13 +1,13 @@
 export default function decorateDFC(block) {
   block.parentNode.classList.add('glass-bg');
 
-  const cardImage = block.querySelector('picture')?.parentNode?.parentNode;
-
   // if no image is found, remove the block
   if (!block.querySelector('picture')) {
     block.parentNode.parentNode.remove();
     return;
   }
+
+  const cardImage = block.querySelector('picture')?.parentNode?.parentNode;
   cardImage.classList.add('darts-feature-card-image');
 
   const image = block.querySelector('picture img');
