@@ -45,7 +45,7 @@ header {
   }
 }
 
-.menu dialog.nav-items-mobile {
+.menu .nav-items-mobile {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -126,7 +126,7 @@ header {
 }
 
 .menu .nav-items-mobile-open {
-  top: 7.5rem;
+  top: 9.25rem;
   flex-direction: column;
   padding: 0;
   gap: 0 !important;

@@ -329,7 +329,7 @@ main .section {
   align-items: center;
   justify-content: center;
 
-  &:not(:has(> .search-wrapper), :has(> .products-wrapper)) {
+  &:not(:has(> .search-wrapper), :has(> .products-wrapper), :has(> .hero-wrapper)) {
     display: flex;
   }
 }
@@ -412,13 +412,13 @@ main .section.highlight {
 .glass-bg {
   background: #d9d9d90d;
   border-radius: 1rem;
-  box-shadow: 0 4px 1.875rem #0000001a;
+  box-shadow: var(--hexagon-box-shadow);
   backdrop-filter: blur(5px);
   padding: 1rem;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .text-center {

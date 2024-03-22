@@ -211,7 +211,7 @@ export default async function decorate(block) {
   </div>
   </div>
 </label></div>
-<dialog class='nav-items-mobile'>
+<div class='nav-items-mobile'>
     <div class="nav-items-container">
     ${mobileNavArray
       .map(
@@ -228,7 +228,7 @@ export default async function decorate(block) {
             .join('')}</ul>`,
       )
       .join('')}
-      </div></dialog>
+      </div></div>
 </nav><div class="mobile-nav-background"/>`;
 
   const hamburgerMenuWrapper = document.getElementById('hamburger-menu-wrapper');
