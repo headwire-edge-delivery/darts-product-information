@@ -37,6 +37,7 @@ function renderResult(result, titleTag, index = 1) {
     const link = document.createElement('a');
     link.href = result.path;
     link.textContent = result.title;
+    link.setAttribute('tabindex', '-1');
     title.append(link);
     a.append(title);
   }

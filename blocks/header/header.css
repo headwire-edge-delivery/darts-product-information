@@ -15,7 +15,7 @@ header {
   max-width: 100%;
   position: fixed;
   flex-direction: row;
-  gap: 1rem;
+  gap: var(--gap);
   z-index: 24;
 }
 
@@ -28,7 +28,7 @@ header {
   padding: 0;
   margin: 0;
   margin-top: 1.75rem;
-  gap: 1rem;
+  gap: var(--gap);
 
   a {
     color: var(--text-color) !important;
@@ -42,6 +42,21 @@ header {
 
   li .icon img {
     filter: var(--icon-color-filter);
+  }
+}
+
+.menu .nav-items-mobile {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  top: 9.25rem;
+  border: 0;
+  background-color: transparent;
+
+  .nav-items-container {
+    position: absolute;
+    top: 0;
   }
 }
 
@@ -111,7 +126,7 @@ header {
 }
 
 .menu .nav-items-mobile-open {
-  top: 7.5rem;
+  top: 9.25rem;
   flex-direction: column;
   padding: 0;
   gap: 0 !important;
@@ -132,7 +147,8 @@ header {
 .mobile-nav-background {
   display: none;
   background-color: #ffffffba;
-  position: absolute;
+  position: fixed;
+  top: 0;
   width: 100dvw;
   height: 100lvh;
   z-index: 23;
@@ -142,12 +158,14 @@ header {
   filter: drop-shadow(var(--hexagon-drop-shadow));
 }
 
-@media (width <= 768px) {
-  .menu .nav-items {
+.menu.mobile {
+  gap: 8px;
+
+  .nav-items {
     display: none;
   }
 
-  .menu .nav-items-mobile-open {
+  .nav-items-mobile-open {
     display: flex;
     position: fixed;
   }
@@ -157,10 +175,6 @@ header {
     height: 7.5rem;
     margin-top: 1.75rem;
     aspect-ratio: var(--hexagon-aspect-ratio);
-  }
-
-  .menu {
-    gap: 8px;
   }
 }
 
@@ -244,11 +258,11 @@ header {
 
   &.active {
     transform: scaleY(0.01) scaleX(0);
-    animation: unfold-in 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation: unfold-in 0.75s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 
     &.out {
       transform: scale(1);
-      animation: unfold-out 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      animation: unfold-out 0.75s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
   }
 
@@ -271,7 +285,7 @@ header {
 
   .header-search-block {
     display: flex;
-    gap: 1rem;
+    gap: var(--gap);
     align-items: center;
     filter: var(--hexagon-drop-shadow);
 
