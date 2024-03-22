@@ -2,9 +2,10 @@ export default function decorateDFC(block) {
   block.parentNode.classList.add('glass-bg');
 
   const cardImage = block.querySelector('picture')?.parentNode?.parentNode;
-  // if no image is found, hide the block
+
+  // if no image is found, remove the block
   if (!block.querySelector('picture')) {
-    block.parentNode.parentNode.classList.add('hidden');
+    block.parentNode.parentNode.remove();
     return;
   }
   cardImage.classList.add('darts-feature-card-image');
