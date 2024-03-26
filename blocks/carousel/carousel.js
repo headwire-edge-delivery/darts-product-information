@@ -1,10 +1,12 @@
 import { fetchPlaceholders } from '../../scripts/aem.min.js';
 
-function updateActiveSlide(slide) {
+function updateActiveSlide(slide, isHero) {
   const block = slide.closest('.carousel');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
   block.dataset.activeSlide = slideIndex;
-  block.classList.add('glass-bg');
+  if (!isHero) {
+    block.classList.add('glass-bg');
+  }
 
   const slides = block.querySelectorAll('.carousel-slide');
 
@@ -43,7 +45,7 @@ function showSlide(block, slideIndex = 0) {
   });
 }
 
-function bindEvents(block) {
+function bindEvents(block, isHero) {
   let autoSlideInterval;
   function startAutoSlide() {
     const changeSlide = () => {
@@ -51,7 +53,7 @@ function bindEvents(block) {
       showSlide(block, activeSlideIndex + 1);
     };
 
-    autoSlideInterval = setInterval(changeSlide, 5000);
+    autoSlideInterval = setInterval(changeSlide, 500000);
   }
 
   function pauseAutoSlide() {
@@ -119,7 +121,7 @@ function bindEvents(block) {
   const slideObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) updateActiveSlide(entry.target);
+        if (entry.isIntersecting) updateActiveSlide(entry.target, isHero);
       });
     },
     { threshold: 0.5 },
@@ -141,23 +143,91 @@ function bindEvents(block) {
   resumeAutoSlide();
 }
 
-function createSlide(row, slideIndex, carouselId) {
+function createSlide(row, slideIndex, carouselId, isHero) {
   const slide = document.createElement('li');
   slide.dataset.slideIndex = slideIndex;
   slide.setAttribute('id', `carousel-${carouselId}-slide-${slideIndex}`);
   slide.classList.add('carousel-slide');
 
-  row.classList.add('carousel-slide-image');
-  slide.append(row.cloneNode(true));
+  if (isHero) {
+    row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
+      column.classList.add(`carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
+
+      // removes a p tag if it has no class, but keeps the content
+      column.querySelectorAll('p').forEach((p) => {
+        if (p.classList.length === 0) {
+          p.outerHTML = p.innerHTML;
+        }
+      });
+
+      slide.append(column);
+    });
+
+    slide.querySelectorAll('.button-container').forEach((buttonContainer) => {
+      if (buttonContainer.tagName.toLowerCase() === 'p') {
+        buttonContainer.outerHTML = `<div class="button-container carousel-slide-content">${buttonContainer.innerHTML}</div>`;
+      }
+      buttonContainer.classList.add('carousel-slide-content');
+
+      // if the buttonContainer is inside a .carousel-slide-image,
+      // move it outside as a direct sibling
+      // cleanup the image container, so it only contains the picture
+      const imageContainer = slide.querySelector('.carousel-slide-image');
+      const newButtonContainer = imageContainer.querySelector('.button-container');
+      if (imageContainer.contains(newButtonContainer)) {
+        imageContainer.after(newButtonContainer);
+      }
+      const picture = imageContainer.querySelector('picture');
+      imageContainer.innerHTML = picture.outerHTML;
+    });
+
+    const labeledBy = slide.querySelector('h1, h2, h3, h4, h5, h6');
+    if (labeledBy) {
+      slide.setAttribute('aria-labelledby', labeledBy.getAttribute('id'));
+    }
+  } else {
+    row.classList.add('carousel-slide-image');
+    slide.append(row.cloneNode(true));
+  }
+
+  // Removes the slide if no picture is present
+  if (!slide.querySelector('picture')) {
+    slide.remove();
+    return null;
+  }
 
   return slide;
 }
 
 let carouselId = 0;
 export default async function decorate(block) {
+  const isHero = block.classList.contains('hero');
   carouselId += 1;
   block.setAttribute('id', `carousel-${carouselId}`);
-  const rows = block.querySelectorAll('picture');
+  const rows = block.querySelectorAll(':scope > div');
+  const pictures = [];
+  rows.forEach((row) => {
+    if (row.querySelectorAll('picture').length > 1) {
+      const allPictures = row.querySelectorAll('picture');
+
+      allPictures.forEach((singlePicture) => {
+        const newRow = row.cloneNode(true);
+        newRow.querySelectorAll('picture').forEach((picture, i) => {
+          // replaces the first picture with the singlePicture, and remove every other picture
+          if (i === 0) {
+            picture.replaceWith(singlePicture);
+          }
+          if (i > 0) {
+            picture.remove();
+          }
+        });
+        pictures.push(newRow);
+      });
+    } else {
+      pictures.push(row);
+    }
+  });
+
   const isSingleSlide = rows.length < 2;
 
   const placeholders = await fetchPlaceholders();
@@ -167,6 +237,8 @@ export default async function decorate(block) {
 
   const container = document.createElement('div');
   container.classList.add('carousel-slides-container');
+  // cleanes the .carousel from elements that are not .carousel-slides-container
+  block.querySelectorAll(':scope > :not(.carousel-slides-container)').forEach((el) => el.remove());
 
   const slidesWrapper = document.createElement('ul');
   slidesWrapper.classList.add('carousel-slides');
@@ -198,8 +270,8 @@ export default async function decorate(block) {
     container.append(slideNavButtons);
   }
 
-  rows.forEach((row, idx) => {
-    const slide = createSlide(row, idx, carouselId);
+  pictures.forEach((row, idx) => {
+    const slide = createSlide(row, idx, carouselId, isHero);
     slidesWrapper.append(slide);
 
     if (slideIndicators) {
@@ -218,9 +290,9 @@ export default async function decorate(block) {
   block.prepend(container);
 
   if (!isSingleSlide) {
-    bindEvents(block);
+    bindEvents(block, isHero);
   }
 
   // Removes all div's without a class, that will cleanup everything that's not a picture
-  block.querySelectorAll('div:not([class])').forEach((div) => div.remove());
+  // block.querySelectorAll('div:not([class])').forEach((div) => div.remove());
 }
