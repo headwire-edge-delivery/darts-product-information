@@ -24,7 +24,7 @@ function renderResult(result, titleTag, index = 1) {
   if (result.image) {
     const wrapper = document.createElement('div');
     wrapper.className = 'product-image';
-    const pic = createOptimizedPicture(result.image, '', false, [{ width: '375' }]);
+    const pic = createOptimizedPicture(result.image, '', false, [{ width: '375', height: '375' }]);
     wrapper.append(pic);
     a.append(wrapper);
     if (index === 0) {

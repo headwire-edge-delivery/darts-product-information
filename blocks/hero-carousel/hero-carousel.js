@@ -139,7 +139,30 @@ function createSlide(row, slideIndex, carouselId) {
 
   row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
     column.classList.add(`hero-carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
+
+    // removes a p tag if it has no class, but keeps the content
+    column.querySelectorAll('p').forEach((p) => {
+      if (p.classList.length === 0) {
+        p.outerHTML = p.innerHTML;
+      }
+    });
+
     slide.append(column);
+  });
+
+  slide.querySelectorAll('.button-container').forEach((buttonContainer) => {
+    if (buttonContainer.tagName.toLowerCase() === 'p') {
+      buttonContainer.outerHTML = `<div class="button-container hero-carousel-slide-content">${buttonContainer.innerHTML}</div>`;
+    }
+    buttonContainer.classList.add('hero-carousel-slide-content');
+
+    // if the buttonContainer is inside a .hero-carousel-slide-image,
+    // move it outside as a direct sibling
+    const imageContainer = slide.querySelector('.hero-carousel-slide-image');
+    const newButtonContainer = imageContainer.querySelector('.button-container');
+    if (imageContainer.contains(newButtonContainer)) {
+      imageContainer.after(newButtonContainer);
+    }
   });
 
   const labeledBy = slide.querySelector('h1, h2, h3, h4, h5, h6');
@@ -155,6 +178,29 @@ export default async function decorate(block) {
   carouselId += 1;
   block.setAttribute('id', `hero-carousel-${carouselId}`);
   const rows = block.querySelectorAll(':scope > div');
+  const pictures = [];
+  rows.forEach((row) => {
+    if (row.querySelectorAll('picture').length > 1) {
+      const allPictures = row.querySelectorAll('picture');
+
+      allPictures.forEach((singlePicture) => {
+        const newRow = row.cloneNode(true);
+        newRow.querySelectorAll('picture').forEach((picture, i) => {
+          // replaces the first picture with the singlePicture, and remove every other picture
+          if (i === 0) {
+            picture.replaceWith(singlePicture);
+          }
+          if (i > 0) {
+            picture.remove();
+          }
+        });
+        pictures.push(newRow);
+      });
+    } else {
+      pictures.push(row);
+    }
+  });
+
   const isSingleSlide = rows.length < 2;
 
   const placeholders = await fetchPlaceholders();
@@ -164,6 +210,10 @@ export default async function decorate(block) {
 
   const container = document.createElement('div');
   container.classList.add('hero-carousel-slides-container');
+  // cleanes the .hero-carousel from elements that are not .hero-carousel-slides-container
+  block
+    .querySelectorAll(':scope > :not(.hero-carousel-slides-container)')
+    .forEach((el) => el.remove());
 
   const slidesWrapper = document.createElement('ul');
   slidesWrapper.classList.add('hero-carousel-slides');
@@ -184,7 +234,7 @@ export default async function decorate(block) {
     container.append(slideNavButtons);
   }
 
-  rows.forEach((row, idx) => {
+  pictures.forEach((row, idx) => {
     const slide = createSlide(row, idx, carouselId);
     slidesWrapper.append(slide);
     row.remove();

@@ -220,4 +220,7 @@ export default async function decorate(block) {
   if (!isSingleSlide) {
     bindEvents(block);
   }
+
+  // Removes all div's without a class, that will cleanup everything that's not a picture
+  block.querySelectorAll('div:not([class])').forEach((div) => div.remove());
 }

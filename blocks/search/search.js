@@ -87,7 +87,7 @@ function renderResult(result, searchTerms, titleTag) {
   if (result.image) {
     const wrapper = document.createElement('div');
     wrapper.className = 'search-result-image';
-    const pic = createOptimizedPicture(result.image, '', false, [{ width: '375' }]);
+    const pic = createOptimizedPicture(result.image, '', false, [{ width: '375', height: '375' }]);
     wrapper.append(pic);
     a.append(wrapper);
   }
