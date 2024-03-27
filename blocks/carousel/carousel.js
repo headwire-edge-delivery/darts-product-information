@@ -53,7 +53,7 @@ function bindEvents(block, isHero) {
       showSlide(block, activeSlideIndex + 1);
     };
 
-    autoSlideInterval = setInterval(changeSlide, 500000);
+    autoSlideInterval = setInterval(changeSlide, 5000);
   }
 
   function pauseAutoSlide() {
@@ -187,6 +187,8 @@ function createSlide(row, slideIndex, carouselId, isHero) {
     }
   } else {
     row.classList.add('carousel-slide-image');
+    const picture = row.querySelector('picture');
+    row.innerHTML = picture?.outerHTML;
     slide.append(row.cloneNode(true));
   }
 

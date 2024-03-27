@@ -27,7 +27,8 @@
   /* fonts */
   --body-font-family: roboto, roboto-fallback;
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --fixed-font-family: 'Roboto Mono', 'Roboto Mono Fallback', menlo, 'menlo Fallback', consolas,
+    'consolas Fallback', 'Liberation Mono', 'Liberation Mono Fallback';
 
   /* body sizes */
   --body-font-size-m: 1.25rem;
@@ -203,6 +204,11 @@ footer:has(*[data-block-status='loading']) {
   display: none;
 }
 
+dialog:modal {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 body.boxed main {
   width: 80%;
   margin: auto;
@@ -369,7 +375,7 @@ main .section {
   font-weight: bold;
   font-size: 1rem;
   line-height: 1.5rem;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--body-font-family);
   cursor: pointer;
   height: 100%;
   width: 100%;
