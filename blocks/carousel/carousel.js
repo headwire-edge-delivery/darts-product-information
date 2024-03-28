@@ -37,10 +37,10 @@ function showSlide(block, slideIndex = 0) {
   if (slideIndex >= slides.length) realSlideIndex = 0;
   const activeSlide = slides[realSlideIndex];
 
-  activeSlide.querySelectorAll('a').forEach((link) => link.removeAttribute('tabindex'));
+  activeSlide?.querySelectorAll('a').forEach((link) => link.removeAttribute('tabindex'));
   block.querySelector('.carousel-slides').scrollTo({
     top: 0,
-    left: activeSlide.offsetLeft,
+    left: activeSlide?.offsetLeft,
     behavior: 'smooth',
   });
 }
@@ -150,8 +150,26 @@ function createSlide(row, slideIndex, carouselId, isHero) {
   slide.classList.add('carousel-slide');
 
   if (isHero) {
-    row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
-      column.classList.add(`carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
+    row.querySelectorAll(':scope > div').forEach((column) => {
+      // get all pictures from the column and remove it from the column but keep it
+      const pictures = column.querySelectorAll('picture');
+      const pictureContainer = document.createElement('div');
+      pictureContainer.classList.add('carousel-slide-image');
+      pictures.forEach((picture) => {
+        pictureContainer.append(picture);
+      });
+      column.prepend(pictureContainer);
+      column.querySelectorAll('a').forEach((a) => {
+        if (!a.closest('.hex')) {
+          const content = document.createElement('div');
+          content.classList.add('carousel-slide-content');
+          const hex = document.createElement('div');
+          hex.classList.add('hex');
+          a.replaceWith(content);
+          hex.append(a);
+          content.append(hex);
+        }
+      });
 
       // removes a p tag if it has no class, but keeps the content
       column.querySelectorAll('p').forEach((p) => {
@@ -198,11 +216,30 @@ function createSlide(row, slideIndex, carouselId, isHero) {
     return null;
   }
 
+  // remove a div if it has no class
+  slide.querySelectorAll('div').forEach((div) => {
+    if (div.classList.length === 0) {
+      div.outerHTML = div.innerHTML;
+    }
+  });
+
+  // anything else than .carousel-slide-image and .carousel-slide-content is removed
+  slide
+    .querySelectorAll(':scope > :not(.carousel-slide-image):not(.carousel-slide-content)')
+    .forEach((el) => el.remove());
   return slide;
 }
 
 let carouselId = 0;
 export default async function decorate(block) {
+  // remove every p without a picture or a a tag
+  block.querySelectorAll('p').forEach((p) => {
+    if (!p.querySelector('picture') && !p.querySelector('a')) {
+      p.remove();
+    }
+  });
+  // remove every br
+  block.querySelectorAll('br').forEach((br) => br.remove());
   const isHero = block.classList.contains('hero');
   carouselId += 1;
   block.setAttribute('id', `carousel-${carouselId}`);
@@ -230,7 +267,11 @@ export default async function decorate(block) {
     }
   });
 
-  const isSingleSlide = rows.length < 2;
+  const totalPictures = pictures.reduce(
+    (acc, row) => acc + row.querySelectorAll('picture').length,
+    0,
+  );
+  const isSingleSlide = totalPictures < 2;
 
   const placeholders = await fetchPlaceholders();
 
@@ -294,7 +335,4 @@ export default async function decorate(block) {
   if (!isSingleSlide) {
     bindEvents(block, isHero);
   }
-
-  // Removes all div's without a class, that will cleanup everything that's not a picture
-  // block.querySelectorAll('div:not([class])').forEach((div) => div.remove());
 }

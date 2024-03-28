@@ -342,8 +342,8 @@ main .section {
 
 @media (width >= 900px) {
   .section {
-    width: min(100%, 2000px);
-    margin: auto;
+    width: min(100%, 2000px) !important;
+    margin: auto !important;
   }
 }
 

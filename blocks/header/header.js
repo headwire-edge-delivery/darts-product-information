@@ -250,6 +250,7 @@ export default async function decorate(block) {
     if (mobileNavOpen) {
       mobileMenu.classList.add('nav-items-mobile-open');
       dialog.showModal();
+      document.body.style.overflow = 'hidden';
 
       document.querySelector('header').addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileNavOpen) {
@@ -262,6 +263,8 @@ export default async function decorate(block) {
     } else {
       mobileMenu.classList.remove('nav-items-mobile-open');
       dialog.close();
+      document.body.style.overflow = '';
+
       document.querySelector('header').removeEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileNavOpen) {
           e.preventDefault();

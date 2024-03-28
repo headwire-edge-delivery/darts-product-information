@@ -23,7 +23,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('roboto-mono.ttf') format('truetype');
+  src: url('../fonts/roboto-mono.ttf') format('truetype');
 }
 
 @font-face {
@@ -42,7 +42,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('menlo.ttf') format('truetype');
+  src: url('../fonts/menlo.ttf') format('truetype');
 }
 
 @font-face {
@@ -61,7 +61,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('consolas.ttf') format('truetype');
+  src: url('../fonts/consolas.ttf') format('truetype');
 }
 
 @font-face {
@@ -80,7 +80,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('liberation-mono.ttf') format('truetype');
+  src: url('../fonts/liberation-mono.ttf') format('truetype');
 }
 
 @font-face {
