@@ -62,44 +62,16 @@ body.modal-active {
   height: 100%;
   width: 100%;
   overflow: auto;
-}
 
-#modal-container.modal-open {
-  transform: scaleY(0.01) scaleX(0);
-  animation: unfold-in 0.75s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
+  &.modal-open {
+    transform: scaleY(0.01) scaleX(0);
+    animation: unfold-in 0.75s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 
-#modal-container.modal-open.out {
-  transform: scale(1);
-  animation: unfold-out 0.75s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-
-#modal-container .modal-background {
-  display: table-cell;
-  background: #000c;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-#modal-container .modal-background .modal {
-  background: white;
-  padding: 50px;
-  display: inline-block;
-  border-radius: 3px;
-  font-weight: 300;
-  position: relative;
-}
-
-#modal-container .modal-background .modal h2 {
-  font-size: 25px;
-  line-height: 25px;
-  margin-bottom: 15px;
-}
-
-#modal-container .modal-background .modal p {
-  font-size: 18px;
-  line-height: 22px;
+    &.out {
+      transform: scale(1);
+      animation: unfold-out 0.75s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+  }
 }
 
 .modal-button {

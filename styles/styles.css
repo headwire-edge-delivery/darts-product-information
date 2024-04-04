@@ -93,6 +93,16 @@ html {
   overflow-y: scroll;
 }
 
+p,
+dl,
+ol,
+ul,
+pre,
+blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 body {
   font-size: var(--body-font-size-m);
   margin: 0;
@@ -104,11 +114,128 @@ body {
   display: none;
   height: 100dvh;
   width: 100%;
+
+  main {
+    position: relative;
+    z-index: 1;
+    padding-top: 10.5rem;
+
+    input {
+      font-size: 1.25rem;
+      width: 100%;
+      display: block;
+      padding: 0.75rem 0.6rem;
+      border-radius: 0.25rem;
+      box-sizing: border-box;
+      border: 1px solid var(--text-color);
+      color: var(--text-color);
+      background-color: var(--background-color);
+
+      /* stylelint-disable */
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>')
+          no-repeat;
+        background-size: 1em;
+        cursor: pointer;
+      }
+      /* stylelint-enable */
+
+      &:hover {
+        border: 1px solid var(--text-color);
+      }
+    }
+
+    blockquote {
+      font-style: italic;
+      margin: 3rem;
+      text-indent: -1rem;
+      hanging-punctuation: first;
+
+      p::before {
+        content: '“';
+        line-height: 0;
+      }
+
+      p::after {
+        content: '”';
+        line-height: 0;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+
+    .section {
+      padding: 2rem 1rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+
+      &:not(:has(> .search-wrapper), :has(> .products-wrapper), :has(> .hero-wrapper)) {
+        display: flex;
+      }
+
+      /* section metadata */
+      &.highlight {
+        background-color: var(--highlight-background-color);
+      }
+    }
+
+    &:has(*[data-section-status='loading']),
+    &:has(*[data-block-status='loading']) {
+      display: none;
+    }
+  }
+
+  &.appear {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.boxed main {
+    width: 80%;
+    margin: auto;
+  }
+
+  &.modal-active main {
+    z-index: 9999991 !important;
+  }
+
+  /* used for the sidekick library */
+  &:has(header[style*='display: none;']) main {
+    padding-top: 0;
+  }
+
+  #cookie-notification:not(.appear) {
+    display: none !important;
+  }
+
+  &.sidekick-library #cookie-notification {
+    display: none !important;
+  }
 }
 
-body.appear {
-  display: flex;
-  flex-direction: column;
+@media (width >= 1151px) {
+  body.boxed main {
+    width: 60%;
+    margin: auto;
+  }
+}
+
+@media (width <= 768px) {
+  body.boxed main {
+    width: 90%;
+    margin: auto;
+  }
 }
 
 header {
@@ -158,16 +285,6 @@ h6 {
   font-size: var(--heading-font-size-xs);
 }
 
-p,
-dl,
-ol,
-ul,
-pre,
-blockquote {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
 hr {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -191,14 +308,6 @@ pre {
   overflow: scroll;
 }
 
-main {
-  position: relative;
-  z-index: 1;
-  padding-top: 10.5rem;
-}
-
-main:has(*[data-section-status='loading']),
-main:has(*[data-block-status='loading']),
 footer:has(*[data-section-status='loading']),
 footer:has(*[data-block-status='loading']) {
   display: none;
@@ -209,44 +318,17 @@ dialog:modal {
   max-width: 100%;
 }
 
-body.boxed main {
-  width: 80%;
-  margin: auto;
-}
-
-@media (width >= 1151px) {
-  body.boxed main {
-    width: 60%;
-    margin: auto;
+a {
+  &:any-link {
+    color: var(--link-color);
+    text-decoration: none;
   }
-}
 
-@media (width <= 768px) {
-  body.boxed main {
-    width: 90%;
-    margin: auto;
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+    color: var(--link-hover-color);
   }
-}
-
-/* if main has a .modal-active element, then make itself a red bg */
-body.modal-active main {
-  z-index: 9999991 !important;
-}
-
-/* used for the sidekick library */
-body:has(header[style*='display: none;']) main {
-  padding-top: 0;
-}
-
-a:any-link {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  text-decoration: underline;
-  color: var(--link-hover-color);
 }
 
 /* buttons */
@@ -265,78 +347,16 @@ button {
 }
 /* stylelint-enable */
 
-main input {
-  font-size: 1.25rem;
-  width: 100%;
-  display: block;
-  padding: 0.75rem 0.6rem;
-  border-radius: 0.25rem;
-  box-sizing: border-box;
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
-  background-color: var(--background-color);
-}
-
-/* stylelint-disable */
-main input::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  height: 1em;
-  width: 1em;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>')
-    no-repeat;
-  background-size: 1em;
-  cursor: pointer;
-}
-/* stylelint-enable */
-
-main input:hover {
-  border: 1px solid var(--text-color);
-}
-
-main blockquote {
-  font-style: italic;
-  margin: 3rem;
-  text-indent: -1rem;
-  hanging-punctuation: first;
-}
-
-main blockquote p::before {
-  content: '“';
-  line-height: 0;
-}
-
-main blockquote p::after {
-  content: '”';
-  line-height: 0;
-}
-
-main img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
-}
-
 .icon {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 1.5rem;
   width: 1.5rem;
-}
 
-.icon img {
-  height: 100%;
-  width: 100%;
-}
-
-main .section {
-  padding: 2rem 1rem;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  &:not(:has(> .search-wrapper), :has(> .products-wrapper), :has(> .hero-wrapper)) {
-    display: flex;
+  img {
+    height: 100%;
+    width: 100%;
   }
 }
 
@@ -406,11 +426,6 @@ main .section {
   }
 }
 
-/* section metadata */
-main .section.highlight {
-  background-color: var(--highlight-background-color);
-}
-
 [data-align='center'] {
   text-align: center;
 }
@@ -429,14 +444,6 @@ main .section.highlight {
 
 .text-center {
   text-align: center;
-}
-
-#cookie-notification:not(.appear) {
-  display: none !important;
-}
-
-body.sidekick-library #cookie-notification {
-  display: none !important;
 }
 
 @keyframes unfold-in {
