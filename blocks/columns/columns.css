@@ -1,22 +1,24 @@
-.columns > div {
-  display: flex;
-  flex-direction: column;
-}
+.columns {
+  img {
+    width: 100%;
+  }
 
-.columns img {
-  width: 100%;
-}
+  > div {
+    display: flex;
+    flex-direction: column;
 
-.columns > div > div {
-  order: 1;
-}
+    > div {
+      order: 1;
+    }
 
-.columns > div > .columns-img-col {
-  order: 0;
-}
+    > .columns-img-col {
+      order: 0;
 
-.columns > div > .columns-img-col img {
-  display: block;
+      img {
+        display: block;
+      }
+    }
+  }
 }
 
 @media (width >= 900px) {
@@ -24,9 +26,9 @@
     align-items: center;
     flex-direction: unset;
     gap: 32px;
-  }
 
-  .columns > div > div {
-    order: unset;
+    > div {
+      order: unset;
+    }
   }
 }

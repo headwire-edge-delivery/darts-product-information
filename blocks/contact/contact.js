@@ -91,6 +91,13 @@ function createInput(fd) {
     input.type = 'email';
   } else if (fd.Format === 'tel' || fd.Format === 'phone') {
     input.type = 'tel';
+    input.addEventListener('input', () => {
+      const currentValue = input.value;
+      const validValue = currentValue.replace(/[^0-9\-+() ]/g, '');
+      if (currentValue !== validValue) {
+        input.value = validValue;
+      }
+    });
   } else {
     input.type = fd.Type;
   }

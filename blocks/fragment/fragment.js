@@ -14,6 +14,10 @@ import { loadBlocks } from '../../scripts/aem.min.js';
  * @returns {HTMLElement} The root element of the fragment
  */
 export async function loadFragment(path) {
+  if (path.endsWith('/')) {
+    // eslint-disable-next-line no-param-reassign
+    path += 'index';
+  }
   if (path && path.startsWith('/')) {
     const resp = await fetch(`${path}.plain.html`);
     if (resp.ok) {

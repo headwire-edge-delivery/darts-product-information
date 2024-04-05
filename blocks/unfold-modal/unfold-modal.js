@@ -5,6 +5,14 @@ function handleClick() {
   document.body.classList.add('modal-active');
   const closeButton = document.querySelector('.modal-close span');
   closeButton.tabIndex = 0;
+  modalContainer.addEventListener('click', (event) => {
+    if (event.target === modalContainer) {
+      modalContainer.classList.add('out');
+      setTimeout(() => {
+        document.body.classList.remove('modal-active');
+      }, 1000);
+    }
+  });
 }
 
 function addModalButton() {
@@ -16,6 +24,14 @@ function addModalButton() {
   modalButton.id = 'modal-button';
   modalButton.tabIndex = 0;
   modalButton.addEventListener('click', handleClick);
+
+  if (modalButton.querySelector('a')) {
+    const link = modalButton.querySelector('a');
+    link.href = '#';
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  }
 
   modalButton.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -39,6 +55,14 @@ function addModalButton() {
     setTimeout(() => {
       document.body.classList.remove('modal-active');
     }, 1000);
+    modalContainer.removeEventListener('click', (event) => {
+      if (event.target === modalContainer) {
+        modalContainer.classList.add('out');
+        setTimeout(() => {
+          document.body.classList.remove('modal-active');
+        }, 1000);
+      }
+    });
   };
   closeButton.addEventListener('click', closeModal);
   closeButton.addEventListener('keydown', (event) => {
@@ -57,14 +81,22 @@ function addModalButton() {
 }
 
 function unfoldModalFunction() {
-  function handleKeyDown(event) {
-    if (event.key === 'Escape' || event.key === 'Esc') {
+  function handleKeyDown(e) {
+    if (e.key === 'Escape' || e.key === 'Esc') {
       const modalContainer = document.getElementById('modal-container');
       if (modalContainer.classList.contains('modal-open')) {
         modalContainer.classList.add('out');
         setTimeout(() => {
           document.body.classList.remove('modal-active');
         }, 1000);
+        modalContainer.removeEventListener('click', (event) => {
+          if (event.target === modalContainer) {
+            modalContainer.classList.add('out');
+            setTimeout(() => {
+              document.body.classList.remove('modal-active');
+            }, 1000);
+          }
+        });
       }
     }
   }

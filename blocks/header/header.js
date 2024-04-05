@@ -97,7 +97,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  const initialBlock = block;
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
@@ -157,9 +156,7 @@ export default async function decorate(block) {
   isDesktop = window.matchMedia(
     `(min-width: ${Math.max((navArray.length * 7.5 + 8.5) * remInPixels, 768)}px)`,
   );
-  isDesktop.addEventListener('change', () => {
-    decorate(initialBlock);
-  });
+
   const mobileNavArray = [];
   const FillMobileNavArray = () => {
     let toggle = false;
@@ -189,7 +186,22 @@ export default async function decorate(block) {
   <path class="hexagon-logo-path-3" d="M290.25 370.04c-24.3 38.16-31.32 99.18-16.74 145.62 13.14 41.58 43.2 80.46 76.5 98.64l9.72 5.22 1.98-12.6c1.26-6.84 3.96-15.84 5.94-19.98 3.06-6.3 3.24-7.92 1.26-9-19.8-11.16-42.12-36.72-52.56-60.3-16.38-36.9-14.94-91.44 3.24-124.56 5.94-10.98 6.66-13.68 4.68-15.48-7.56-6.66-24.3-20.7-25.02-20.7-.36 0-4.5 5.94-9 13.14zM575.74 366.8c-5.94 5.58-12.24 10.44-13.86 10.98-2.52.72-1.98 2.7 4.14 14.04 9.72 18.18 13.86 31.32 16.2 51.3 3.24 27.54-2.88 59.04-16.56 84.78-7.92 14.76-26.28 36-39.24 45.18l-10.62 7.38 4.5 9.72c2.34 5.4 4.86 14.22 5.4 19.62s1.8 9.9 2.7 9.9c4.14 0 28.44-17.64 38.16-27.72 21.42-22.32 41.58-57.78 50.04-88.74 5.76-20.52 5.58-66.96 0-87.84-4.5-16.56-17.64-44.1-25.02-52.56l-5.04-5.76-10.8 9.72zM426.33 436.46c-1.26 3.96-13.5 105.66-13.5 112.5 0 .18 13.86.54 30.78.54h30.96l-1.08-10.44c-1.44-16.02-10.26-87.48-11.7-96.12l-1.44-7.74-16.56-.54c-12.24-.36-16.74.18-17.46 1.8zM408.51 584.06c-2.52 16.02-2.34 22.86.18 23.76 4.14 1.62 70.38 1.26 71.46-.36.36-.72 0-7.56-1.08-15.3l-1.97-13.86h-67.68l-.91 5.76zM401.13 646.71c-.54 5.4-1.44 12.06-1.8 14.76l-.72 5.04h43.74c23.94 0 44.1-.36 44.64-.9.72-.9-1.08-16.56-3.06-25.2-.72-3.42-2.16-3.6-41.22-3.6l-40.5-.18-1.08 10.08zM395.91 704.67c-.54 5.22-1.08 12.24-1.08 15.3v5.94H494.37l-1.26-11.34c-.72-6.12-1.8-12.96-2.34-15.3l-.9-3.96H397.17l-1.26 9.36zM391.77 779.37c.54 20.52 1.08 24.12 5.22 32.04 5.4 10.26 16.2 21.42 23.58 24.12 3.78 1.44 4.86 3.06 4.86 7.2 0 5.76 13.5 107.82 15.84 120.78.9 4.68 2.16 7.02 2.7 5.4 3.78-9.72 13.5-77.22 16.74-116.28l1.08-14.58 9.18-6.12c5.76-3.78 12.24-10.44 16.92-17.46l7.74-11.34v-46.62H391.05l.72 22.86z"/>
   </svg></a>`;
 
-  block.innerHTML = /* html */ `<nav class="menu ${isDesktop.matches ? 'desktop' : 'mobile'}">
+  function decorateNav() {
+    const hamburgerMenuContainer = (isMobile) => `<div class="hamburger-menu-container">
+    <div class="hex hamburger-menu" id="hamburger-menu-wrapper${
+      isMobile ? '-mobile' : ''
+    }" tabIndex=0>
+      <input id="toggle-checker${isMobile ? '-mobile' : ''}" type="checkbox" class="toggle-checker">
+  <label id="toggler-label" for="toggle-checker${isMobile ? '-mobile' : ''}">
+  <div class="checkboxtoggler">
+    <div class="line-1"></div>
+    <div class="line-2"></div>
+    <div class="line-3"></div>
+  </div>
+  </div>
+  </label></div>`;
+
+    block.innerHTML = /* html */ `<nav class="menu ${isDesktop.matches ? 'desktop' : 'mobile'}">
     <ul class="nav-items nav-items-first-half">${firstHalf
       .map((navFirst) => `<li><span class="hex">${navFirst.outerHTML}</span></li>`)
       .join('')}
@@ -200,49 +212,49 @@ export default async function decorate(block) {
       .join('')}
     </ul>
     
-    <div class="hamburger-menu-container">
-    <div class="hex hamburger-menu" id="hamburger-menu-wrapper" tabIndex=0>
-      <input id="toggle-checker" type="checkbox">
-<label id="toggler-label" for="toggle-checker">
-  <div class="checkboxtoggler">
-    <div class="line-1"></div>
-    <div class="line-2"></div>
-    <div class="line-3"></div>
-  </div>
-  </div>
-</label></div>
-<div class='nav-items-mobile'>
-    <div class="nav-items-container">
+    ${hamburgerMenuContainer(false)}
+<dialog class='nav-items-mobile'>
+  <div class="nav-items-container">
+    <ul>
+      ${logo}
+      ${hamburgerMenuContainer(true)}
+      </ul>
     ${mobileNavArray
       .map(
-        (navContainer, index) =>
+        (navContainer) =>
           `<ul>${navContainer
-            .map(
-              (navMobile, i) =>
-                `<li ${
-                  mobileNavArray.length - 1 === index && navContainer.length - 1 === i
-                    ? 'class="last-nav-item"'
-                    : ''
-                }><span class="hex">${navMobile.outerHTML}</span></li>`,
-            )
+            .map((navMobile) => `<li><span class="hex">${navMobile.outerHTML}</span></li>`)
             .join('')}</ul>`,
       )
       .join('')}
-      </div></div>
-</nav><div class="mobile-nav-background"/>`;
+      </div></dialog>
+</nav>`;
+  }
+  decorateNav();
+  isDesktop.addEventListener('change', () => {
+    decorateNav();
+  });
 
   const hamburgerMenuWrapper = document.getElementById('hamburger-menu-wrapper');
   const hamburgerMenu = document.getElementById('toggle-checker');
+  const hamburgerMenuWrapperMobile = document.getElementById('hamburger-menu-wrapper-mobile');
+  const hamburgerMenuMobile = document.getElementById('toggle-checker-mobile');
   const mobileMenu = document.getElementsByClassName('nav-items-mobile')[0];
-  const mobileNavBackground = document.getElementsByClassName('mobile-nav-background')[0];
 
   function toggleMobileNav() {
     mobileNavOpen = !mobileNavOpen;
-    const menuLogo = document.querySelector('.hexagon-menu');
-    const lastNavItem = mobileMenu.querySelector('.last-nav-item');
+    const dialog = document.querySelector('.nav-items-mobile');
+
+    function toggleChecker(checked) {
+      document.getElementById('toggle-checker').checked = checked;
+      document.getElementById('toggle-checker-mobile').checked = checked;
+    }
+
     if (mobileNavOpen) {
       mobileMenu.classList.add('nav-items-mobile-open');
-      mobileNavBackground.style.display = 'flex';
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+
       document.querySelector('header').addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileNavOpen) {
           e.preventDefault();
@@ -250,21 +262,12 @@ export default async function decorate(block) {
           toggleMobileNav();
         }
       });
-      menuLogo.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab' && e.shiftKey) {
-          e.preventDefault();
-          lastNavItem.querySelector('a').focus();
-        }
-      });
-      lastNavItem.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab' && !e.shiftKey) {
-          e.preventDefault();
-          menuLogo.focus();
-        }
-      });
+      toggleChecker(true);
     } else {
       mobileMenu.classList.remove('nav-items-mobile-open');
-      mobileNavBackground.style.display = 'none';
+      dialog.close();
+      document.body.style.overflow = '';
+
       document.querySelector('header').removeEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileNavOpen) {
           e.preventDefault();
@@ -272,18 +275,7 @@ export default async function decorate(block) {
           toggleMobileNav();
         }
       });
-      menuLogo.removeEventListener('keydown', (e) => {
-        if (e.key === 'Tab' && e.shiftKey) {
-          e.preventDefault();
-          lastNavItem.querySelector('a').focus();
-        }
-      });
-      lastNavItem.removeEventListener('keydown', (e) => {
-        if (e.key === 'Tab' && !e.shiftKey) {
-          e.preventDefault();
-          menuLogo.focus();
-        }
-      });
+      toggleChecker(false);
     }
   }
 
@@ -296,7 +288,8 @@ export default async function decorate(block) {
   });
 
   hamburgerMenu.addEventListener('click', toggleMobileNav);
-  hamburgerMenuWrapper.addEventListener('keydown', (e) => {
+  hamburgerMenuMobile.addEventListener('click', toggleMobileNav);
+  function keyboardToggleMobileNav(e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       hamburgerMenu.checked = !hamburgerMenu.checked;
@@ -306,6 +299,12 @@ export default async function decorate(block) {
       hamburgerMenu.checked = false;
       toggleMobileNav();
     }
+  }
+  hamburgerMenuWrapperMobile.addEventListener('keydown', (e) => {
+    keyboardToggleMobileNav(e);
+  });
+  hamburgerMenuWrapper.addEventListener('keydown', (e) => {
+    keyboardToggleMobileNav(e);
   });
 
   document?.querySelector('.header-search-wrapper')?.remove();

@@ -181,6 +181,7 @@
 
       &.hero {
         max-width: 100%;
+        padding: 0;
 
         .carousel-slide {
           min-height: min(40rem, calc(100svh - var(--nav-height)));
@@ -223,12 +224,6 @@
 
 @media (width >= 600px) {
   .carousel .carousel-slide .carousel-slide-content {
-    --slide-content-width: 50%;
-
-    margin: 2.5rem 5rem;
-
-    &[data-align='justify'] {
-      --slide-content-width: auto;
-    }
+    padding: 2.5rem 5rem !important;
   }
 }

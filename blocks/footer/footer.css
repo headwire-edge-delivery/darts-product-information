@@ -7,66 +7,66 @@ footer {
   background: linear-gradient(90deg, #d40c0c 0%, #d9d9d91a 60%);
   margin-top: auto;
   min-height: fit-content;
-}
 
-footer .footer .section .columns-wrapper {
-  > div {
-    margin: 0;
-    width: 100% !important;
-    max-width: auto !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-
+  .footer .section .columns-wrapper {
     > div {
+      margin: 0;
+      width: 100% !important;
+      max-width: auto !important;
       display: flex;
+      flex-direction: column;
       justify-content: space-evenly;
-      width: 100%;
+      align-items: center;
+
+      > div {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+      }
     }
-  }
 
-  ul {
-    margin-top: 20px;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: var(--gap);
-
-    li {
-      list-style: none;
-      margin-bottom: 10px;
-    }
-  }
-
-  .columns {
-    display: flex;
-    justify-content: center;
-    justify-content: space-evenly;
-    gap: var(--gap);
-
-    div {
+    ul {
+      margin-top: 20px;
+      padding: 0;
       display: flex;
-      align-content: center;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
       gap: var(--gap);
-      color: white !important;
 
-      a {
+      li {
+        list-style: none;
+        margin-bottom: 10px;
+      }
+    }
+
+    .columns {
+      display: flex;
+      justify-content: center;
+      justify-content: space-evenly;
+      gap: var(--gap);
+
+      div {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        gap: var(--gap);
         color: white !important;
 
-        &:focus {
-          outline: none;
+        a {
+          color: white !important;
+
+          &:focus {
+            outline: none;
+          }
         }
       }
     }
   }
-}
 
-footer .icon img {
-  filter: var(--icon-color-filter);
+  .icon img {
+    filter: var(--icon-color-filter);
+  }
 }
 
 @media (width <= 768px) {
@@ -79,13 +79,13 @@ footer .icon img {
     border-radius: 0;
     background: linear-gradient(0deg, #d40c0c 0%, #d9d9d91a 100%);
     min-height: fit-content;
-  }
 
-  footer .section .columns-wrapper div div:nth-child(even) {
-    flex-direction: column-reverse;
+    .section .columns-wrapper div div:nth-child(even) {
+      flex-direction: column-reverse;
 
-    div {
-      flex-direction: row;
+      div {
+        flex-direction: row;
+      }
     }
   }
 }
