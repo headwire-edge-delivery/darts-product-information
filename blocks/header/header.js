@@ -229,84 +229,84 @@ export default async function decorate(block) {
       .join('')}
       </div></dialog>
 </nav>`;
+
+    const hamburgerMenuWrapper = document.getElementById('hamburger-menu-wrapper');
+    const hamburgerMenu = document.getElementById('toggle-checker');
+    const hamburgerMenuWrapperMobile = document.getElementById('hamburger-menu-wrapper-mobile');
+    const hamburgerMenuMobile = document.getElementById('toggle-checker-mobile');
+    const mobileMenu = document.getElementsByClassName('nav-items-mobile')[0];
+
+    function toggleMobileNav() {
+      mobileNavOpen = !mobileNavOpen;
+      const dialog = document.querySelector('.nav-items-mobile');
+
+      function toggleChecker(checked) {
+        document.getElementById('toggle-checker').checked = checked;
+        document.getElementById('toggle-checker-mobile').checked = checked;
+      }
+
+      if (mobileNavOpen) {
+        mobileMenu.classList.add('nav-items-mobile-open');
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+
+        document.querySelector('header').addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobileNavOpen) {
+            e.preventDefault();
+            hamburgerMenu.checked = false;
+            toggleMobileNav();
+          }
+        });
+        toggleChecker(true);
+      } else {
+        mobileMenu.classList.remove('nav-items-mobile-open');
+        dialog.close();
+        document.body.style.overflow = '';
+
+        document.querySelector('header').removeEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobileNavOpen) {
+            e.preventDefault();
+            hamburgerMenu.checked = false;
+            toggleMobileNav();
+          }
+        });
+        toggleChecker(false);
+      }
+    }
+
+    const searchLinks = mobileMenu.querySelectorAll('a:has(.icon-search)');
+    searchLinks.forEach((link) => {
+      link.addEventListener('click', toggleMobileNav);
+      link.addEventListener('click', () => {
+        hamburgerMenu.checked = false;
+      });
+    });
+
+    hamburgerMenu.addEventListener('click', toggleMobileNav);
+    hamburgerMenuMobile.addEventListener('click', toggleMobileNav);
+    function keyboardToggleMobileNav(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburgerMenu.checked = !hamburgerMenu.checked;
+        toggleMobileNav();
+      } else if (e.key === 'Escape' && mobileNavOpen) {
+        e.preventDefault();
+        hamburgerMenu.checked = false;
+        toggleMobileNav();
+      }
+    }
+    hamburgerMenuWrapperMobile.addEventListener('keydown', (e) => {
+      keyboardToggleMobileNav(e);
+    });
+    hamburgerMenuWrapper.addEventListener('keydown', (e) => {
+      keyboardToggleMobileNav(e);
+    });
+
+    document?.querySelector('.header-search-wrapper')?.remove();
+    decorateHeaderSearch(block);
   }
   decorateNav();
   isDesktop.addEventListener('change', () => {
     decorateNav();
   });
-
-  const hamburgerMenuWrapper = document.getElementById('hamburger-menu-wrapper');
-  const hamburgerMenu = document.getElementById('toggle-checker');
-  const hamburgerMenuWrapperMobile = document.getElementById('hamburger-menu-wrapper-mobile');
-  const hamburgerMenuMobile = document.getElementById('toggle-checker-mobile');
-  const mobileMenu = document.getElementsByClassName('nav-items-mobile')[0];
-
-  function toggleMobileNav() {
-    mobileNavOpen = !mobileNavOpen;
-    const dialog = document.querySelector('.nav-items-mobile');
-
-    function toggleChecker(checked) {
-      document.getElementById('toggle-checker').checked = checked;
-      document.getElementById('toggle-checker-mobile').checked = checked;
-    }
-
-    if (mobileNavOpen) {
-      mobileMenu.classList.add('nav-items-mobile-open');
-      dialog.showModal();
-      document.body.style.overflow = 'hidden';
-
-      document.querySelector('header').addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileNavOpen) {
-          e.preventDefault();
-          hamburgerMenu.checked = false;
-          toggleMobileNav();
-        }
-      });
-      toggleChecker(true);
-    } else {
-      mobileMenu.classList.remove('nav-items-mobile-open');
-      dialog.close();
-      document.body.style.overflow = '';
-
-      document.querySelector('header').removeEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileNavOpen) {
-          e.preventDefault();
-          hamburgerMenu.checked = false;
-          toggleMobileNav();
-        }
-      });
-      toggleChecker(false);
-    }
-  }
-
-  const searchLinks = mobileMenu.querySelectorAll('a:has(.icon-search)');
-  searchLinks.forEach((link) => {
-    link.addEventListener('click', toggleMobileNav);
-    link.addEventListener('click', () => {
-      hamburgerMenu.checked = false;
-    });
-  });
-
-  hamburgerMenu.addEventListener('click', toggleMobileNav);
-  hamburgerMenuMobile.addEventListener('click', toggleMobileNav);
-  function keyboardToggleMobileNav(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      hamburgerMenu.checked = !hamburgerMenu.checked;
-      toggleMobileNav();
-    } else if (e.key === 'Escape' && mobileNavOpen) {
-      e.preventDefault();
-      hamburgerMenu.checked = false;
-      toggleMobileNav();
-    }
-  }
-  hamburgerMenuWrapperMobile.addEventListener('keydown', (e) => {
-    keyboardToggleMobileNav(e);
-  });
-  hamburgerMenuWrapper.addEventListener('keydown', (e) => {
-    keyboardToggleMobileNav(e);
-  });
-
-  document?.querySelector('.header-search-wrapper')?.remove();
-  decorateHeaderSearch(block);
 }
