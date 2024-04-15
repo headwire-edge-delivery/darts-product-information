@@ -307,6 +307,7 @@ export default async function decorate(block) {
   }
   decorateNav();
   isDesktop.addEventListener('change', () => {
+    mobileNavOpen = false;
     decorateNav();
   });
 }
